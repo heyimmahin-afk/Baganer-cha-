@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Baganer Cha — Fresh & Premium Tea from Sreemangal" />
+  <title>Baganer Cha — Fresh & Premium Tea from Sreemangal</title>
+
+  <!-- One google fonts link (serif for headings, sans for body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================
+       Variables & Reset
+       ========================== */
+    :root{
+      --lime:#a8e24a; /* main lime green */
+      --lime-strong:#7cca18;
+      --dark-green:#0b3d16;
+      --muted:#f5f7f5;
+      --glass: rgba(255,255,255,0.85);
+      --card-shadow: 0 8px 20px rgba(11,61,22,0.08);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line-height:1.45;color:#0b2b16;background:white;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+      overscroll-behavior-y: none;
+    }
+    h1,h2,h3{font-family:Merriweather,serif;color:var(--dark-green);margin:0}
+    p{margin:0}
+
+    /* ==========================
+       Layout & Header
+       ========================== */
+    .site-header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:space-between;padding:12px 18px;transition:all .28s cubic-bezier(.2,.9,.3,1);box-shadow:0 6px 18px rgba(10,10,10,0.04)}
+    .site-header.shrink{padding:6px 18px;transform:translateY(-2px)}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .mark{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--lime),var(--lime-strong));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:Merriweather}
+    .nav{display:flex;gap:14px;align-items:center}
+    .nav a{color:var(--dark-green);text-decoration:none;font-weight:600;font-size:14px}
+    .burger{display:none}
+
+    /* ==========================
+       Hero
+       ========================== */
+    .hero{min-height:72vh;display:grid;align-items:center;padding:36px 18px;position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,61,22,0.45), rgba(255,255,255,0.02)), radial-gradient(circle at 20% 20%, rgba(168,226,74,0.12), transparent 10%), linear-gradient(180deg, rgba(168,226,74,0.06), transparent 40%);z-index:0}
+    /* decorative animated leaves */
+    .leaf{position:absolute;width:180px;height:180px;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2));border-radius:50%;opacity:.06;transform:translateY(0);will-change:transform}
+    .leaf.l1{left:-40px;top:10%}
+    .leaf.l2{right:-60px;top:12%}
+    .leaf.l3{left:10%;bottom:-10%}
+
+    .hero-inner{position:relative;z-index:10;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .hero-copy h1{font-size:clamp(28px,4.6vw,48px);line-height:1.02}
+    .tagline{display:inline-block;color:var(--dark-green);font-weight:700}
+    .subtxt{margin-top:12px;color:rgba(11,43,18,0.85)}
+    .shop-btn{display:inline-block;margin-top:18px;padding:12px 18px;border-radius:12px;background:linear-gradient(90deg,var(--lime),var(--lime-strong));color:var(--dark-green);font-weight:700;text-decoration:none;box-shadow:0 8px 28px rgba(124,202,24,0.12);transition:all .22s}
+    .shop-btn:hover{transform:translateY(-4px);filter:brightness(1.02);box-shadow:0 14px 36px rgba(124,202,24,0.18)}
+
+    /* animated typing underline */
+    .typing{border-right:3px solid rgba(11,61,22,0.9);padding-right:6px;white-space:nowrap;overflow:hidden}
+
+    /* hero image panel */
+    .hero-panel{background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));border-radius:18px;padding:18px;box-shadow:var(--card-shadow);display:flex;flex-direction:column;gap:12px}
+    .hero-panel img{width:100%;height:240px;object-fit:cover;border-radius:10px}
+    .badge{background:var(--lime-strong);color:white;padding:6px 10px;border-radius:999px;font-weight:700;display:inline-block}
+
+    /* ==========================
+       Products
+       ========================== */
+    .products{padding:32px 18px;max-width:1200px;margin:0 auto}
+    .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+    .filter-btn{background:transparent;border:1px solid rgba(11,61,22,0.06);padding:8px 12px;border-radius:999px;font-weight:600;cursor:pointer;transition:all .18s}
+    .filter-btn.active{background:var(--lime);color:white;box-shadow:0 8px 20px rgba(124,202,24,0.08)}
+    .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .card{background:white;border-radius:12px;padding:12px;box-shadow:var(--card-shadow);overflow:visible;position:relative;transform:translateY(10px);opacity:0;transition:all .45s cubic-bezier(.2,.9,.3,1)}
+    .card.visible{transform:none;opacity:1}
+    .card img{width:100%;height:180px;object-fit:cover;border-radius:8px;transition:transform .28s}
+    .card:hover img{transform:scale(1.06)}
+    .price{font-weight:700;color:var(--dark-green);margin-top:8px}
+    .add-btn{position:absolute;right:14px;bottom:14px;background:var(--dark-green);color:white;padding:8px 12px;border-radius:999px;border:none;cursor:pointer;transform:translateY(12px);opacity:0;transition:all .22s}
+    .card:hover .add-btn{transform:none;opacity:1}
+
+    /* Load more */
+    .load-more{display:block;margin:22px auto;padding:12px 20px;border-radius:12px;background:linear-gradient(90deg,var(--lime),var(--lime-strong));border:none;font-weight:700;cursor:pointer}
+
+    /* ==========================
+       Cart Sidebar
+       ========================== */
+    .cart-toggle{position:fixed;right:18px;bottom:18px;width:64px;height:64px;border-radius:16px;background:linear-gradient(180deg,var(--lime),var(--lime-strong));display:flex;align-items:center;justify-content:center;z-index:80;box-shadow:0 12px 30px rgba(10,10,10,0.12);cursor:pointer}
+    .cart-toggle .count{position:absolute;top:-6px;right:-6px;background:#ff4757;color:white;padding:6px 8px;border-radius:999px;font-weight:700;font-size:13px}
+    .cart-panel{position:fixed;right:0;top:0;height:100vh;width:380px;max-width:92%;background:linear-gradient(180deg,white, #fbfff8);box-shadow:-18px 0 40px rgba(10,10,10,0.08);transform:translateX(110%);transition:transform .36s cubic-bezier(.2,.9,.3,1);z-index:90;padding:18px;overflow:auto}
+    .cart-panel.open{transform:translateX(0)}
+    .cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(11,61,22,0.06)}
+
+    /* ==========================
+       About & Why Us
+       ========================== */
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding:36px 18px;max-width:1200px;margin:0 auto}
+    .story p{margin-top:12px}
+    .icons-grid{display:flex;gap:16px;flex-wrap:wrap}
+    .icon-card{flex:1 1 180px;background:linear-gradient(180deg,white,#fbfff8);padding:18px;border-radius:12px;box-shadow:var(--card-shadow);transform:translateY(18px);opacity:0}
+
+    /* ==========================
+       Testimonials
+       ========================== */
+    .testimonials{padding:36px 18px;background:linear-gradient(180deg, rgba(168,226,74,0.03), transparent)}
+    .test-slider{max-width:900px;margin:0 auto;position:relative;overflow:hidden}
+    .slides{display:flex;transition:transform .6s ease}
+    .slide{min-width:100%;padding:18px}
+
+    /* ==========================
+       Blog & Gallery
+       ========================== */
+    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .masonry{column-count:3;column-gap:12px}
+    .masonry img{width:100%;break-inside:avoid;margin-bottom:12px;border-radius:8px}
+
+    /* ==========================
+       Contact & Footer
+       ========================== */
+    .contact{padding:36px 18px;max-width:900px;margin:0 auto}
+    .contact form{display:grid;gap:12px}
+    .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:var(--dark-green);color:white;padding:10px 14px;border-radius:8px;display:none}
+
+    footer{background:#06220f;color:rgba(255,255,255,0.9);padding:28px 18px}
+    footer .cols{display:flex;gap:18px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+    .social a{display:inline-block;margin-right:8px}
+
+    /* ==========================
+       Responsive
+       ========================== */
+    @media(max-width:1100px){.product-grid{grid-template-columns:repeat(3,1fr)}.hero-inner{grid-template-columns:1fr 340px}}
+    @media(max-width:860px){.product-grid{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}.hero-inner{grid-template-columns:1fr}.nav{display:none}.burger{display:block}}
+    @media(max-width:520px){.product-grid{grid-template-columns:1fr}.hero{min-height:62vh}.hero-panel img{height:160px}}
+
+    /* ==========================
+       Small animations
+       ========================== */
+    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-16px)}100%{transform:translateY(0)}}
+    .leaf{animation:floaty 9s ease-in-out infinite}
+    .bounce{animation:bounce .8s ease}
+    @keyframes bounce{0%{transform:translateY(0)}30%{transform:translateY(-8px)}60%{transform:translateY(0)}100%{transform:translateY(0)}}
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="logo" aria-hidden>
+      <div class="mark">BC</div>
+      <div>
+        <div style="font-weight:700">Baganer Cha</div>
+        <div style="font-size:12px;color:rgba(11,61,22,0.5)">Fresh from Sreemangal</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Primary Navigation">
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#why">Why Us</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div style="display:flex;gap:12px;align-items:center">
+      <button class="badge" id="cartCountBadge" aria-hidden>0</button>
+      <button class="burger" aria-label="menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="leaf l1"></div>
+    <div class="leaf l2"></div>
+    <div class="leaf l3"></div>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1 class="typing" id="typed">Fresh &amp; Premium Tea from Sreemangal</h1>
+        <p class="subtxt" id="subtxt">Hand-picked, 100% organic leaves — tradition in every cup.</p>
+        <a class="shop-btn" href="#shop" id="shopNow">Shop Now</a>
+      </div>
+
+      <aside class="hero-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:13px;color:rgba(11,61,22,0.6)">Small-batch</div>
+            <div style="font-weight:800">Sreemangal Select</div>
+          </div>
+          <div class="badge">Best Seller</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1509460913899-8a6f0f0b0fb8?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=7a1a8bd1f9e9a5f3b9f1d6a0be6d8a7d" alt="tea leaves"/>
+        <p style="font-size:14px;color:rgba(11,61,22,0.7)">Experience the delicate aroma &amp; bright cup of our signature blend.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="products" id="shop">
+    <div style="display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto">
+      <h2>Our Teas</h2>
+      <div style="color:rgba(11,61,22,0.6)">Showing <span id="visibleCount">16+</span> products</div>
+    </div>
+
+    <div class="filters" id="filterBar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="Green">Green Tea</button>
+      <button class="filter-btn" data-filter="Black">Black Tea</button>
+      <button class="filter-btn" data-filter="Premium">Premium</button>
+      <button class="filter-btn" data-filter="Herbal">Herbal</button>
+    </div>
+
+    <div class="product-grid" id="productGrid" aria-live="polite"></div>
+
+    <button class="load-more" id="loadMore">Load More</button>
+  </section>
+
+  <!-- Cart Toggle & Panel -->
+  <div class="cart-toggle" id="cartToggle" aria-label="Open cart">
+    <div style="font-weight:800">🫖</div>
+    <div class="count" id="cartCount">0</div>
+  </div>
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center">
+      <strong>Total:</strong><div id="cartTotal">৳0</div>
+    </div>
+    <button id="checkout" style="margin-top:12px;padding:12px;border-radius:10px;background:var(--lime-strong);border:none;font-weight:800;cursor:pointer">Checkout</button>
+  </aside>
+
+  <!-- About -->
+  <section class="split" id="about">
+    <div class="story">
+      <h2>About Baganer Cha</h2>
+      <p style="margin-top:12px;">Born in the lush hills of Sreemangal — our tea is grown in small family gardens, hand-picked and carefully processed to preserve nature's taste.</p>
+      <p style="margin-top:10px;color:rgba(11,61,22,0.7)">We are committed to ethical farming, fair pay, and the memory of every leaf.</p>
+    </div>
+    <div style="position:relative;overflow:hidden;border-radius:12px">
+      <img src="https://images.unsplash.com/photo-1447034356904-8d0b8f6bb3f0?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=b8b7a7b4d9c5e2f6a8c6c9d0d0f3c4b2" alt="tea garden" style="width:100%;height:360px;object-fit:cover;filter:brightness(.98)"/>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section style="padding:36px 18px" id="why">
+    <h2 style="max-width:1200px;margin:0 auto 18px">Why Choose Us</h2>
+    <div class="icons-grid" style="max-width:1200px;margin:0 auto">
+      <div class="icon-card"> <h3>Pure &amp; Organic</h3><p style="margin-top:8px">No pesticides — just pure flavor.</p></div>
+      <div class="icon-card"> <h3>Small-batch</h3><p style="margin-top:8px">Careful processing for superior taste.</p></div>
+      <div class="icon-card"> <h3>Direct from Garden</h3><p style="margin-top:8px">Farm-to-cup freshness.</p></div>
+      <div class="icon-card"> <h3>Sustainable</h3><p style="margin-top:8px">Eco-conscious packaging &amp; practices.</p></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <h2 style="text-align:center">What Customers Say</h2>
+    <div class="test-slider" style="margin-top:18px">
+      <div class="slides" id="slides">
+        <div class="slide">"Delicious aroma and clean finish — my daily cup." — Ayesha</div>
+        <div class="slide">"Fast delivery and lovely packaging." — Rahim</div>
+        <div class="slide">"Best green tea I've tried." — Sumi</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section style="padding:36px 18px" id="blog">
+    <h2 style="max-width:1200px;margin:0 auto 12px">From our Blog</h2>
+    <div class="blog-grid" style="max-width:1200px;margin:0 auto">
+      <article style="background:white;padding:12px;border-radius:10px;box-shadow:var(--card-shadow)">
+        <h3>Tea Picking 101</h3><p style="margin-top:8px">How we harvest the tender leaves.</p>
+      </article>
+      <article style="background:white;padding:12px;border-radius:10px;box-shadow:var(--card-shadow)">
+        <h3>Brewing Guide</h3><p style="margin-top:8px">Brew the perfect cup every time.</p>
+      </article>
+      <article style="background:white;padding:12px;border-radius:10px;box-shadow:var(--card-shadow)">
+        <h3>Health Benefits</h3><p style="margin-top:8px">The goodness of tea in every sip.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Gallery Masonry -->
+  <section style="padding:36px 18px">
+    <h2 style="max-width:1200px;margin:0 auto 12px">Gallery</h2>
+    <div class="masonry" style="max-width:1200px;margin:0 auto">
+      <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=19b8ae3b2b3f6e9c5" alt="garden1">
+      <img src="https://images.unsplash.com/photo-1508747703725-719300b3eff8?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=5a2b2a9c9d9c3a5f" alt="garden2">
+      <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9c1c9e9d8b2f3c4d" alt="garden3">
+      <img src="https://images.unsplash.com/photo-1494989940723-1a8b10f9b1d2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=2b1b2b3b4b5b6b7c" alt="garden4">
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form id="contactForm" onsubmit="return false;">
+      <input type="text" id="name" placeholder="Name" required style="padding:12px;border-radius:8px;border:1px solid rgba(11,61,22,0.06)" />
+      <input type="email" id="email" placeholder="Email" required style="padding:12px;border-radius:8px;border:1px solid rgba(11,61,22,0.06)" />
+      <input type="tel" id="bikash" placeholder="Bikash number" style="padding:12px;border-radius:8px;border:1px solid rgba(11,61,22,0.06)" />
+      <textarea id="message" placeholder="Message" rows="4" style="padding:12px;border-radius:8px;border:1px solid rgba(11,61,22,0.06)"></textarea>
+      <button style="padding:12px;border-radius:10px;background:var(--lime);border:none;font-weight:700;cursor:pointer">Send Message</button>
+    </form>
+
+    <div style="margin-top:18px">
+      <p><strong>Phone / WhatsApp:</strong> 01624066662</p>
+      <p><strong>Email:</strong> baganercha@gmail.com</p>
+      <p><strong>Facebook:</strong> <a href="https://facebook.com/baganercha" target="_blank" rel="noreferrer">facebook.com/baganercha</a></p>
+      <p><strong>Bikash:</strong> 01842995909</p>
+    </div>
+  </section>
+
+  <div class="toast" id="toast">Message sent</div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="cols">
+      <div style="flex:2">
+        <h3>Baganer Cha</h3>
+        <p style="max-width:340px">Premium tea from Sreemangal — small-batch, ethically grown.</p>
+      </div>
+      <div style="flex:1">
+        <h4>Quick Links</h4>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
+          <a href="#shop">Shop</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div style="flex:1">
+        <h4>Contact</h4>
+        <p>01624066662</p>
+        <p>baganercha@gmail.com</p>
+      </div>
+      <div style="flex:1">
+        <h4>Newsletter</h4>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <input id="nlemail" placeholder="Email" style="padding:8px;border-radius:8px;border:none;flex:1" />
+          <button id="nlbtn" style="padding:8px;border-radius:8px;background:var(--lime-strong);border:none;cursor:pointer">Go</button>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1200px;margin:18px auto 0;color:rgba(255,255,255,0.7);display:flex;justify-content:space-between;align-items:center">
+      <div>&copy; <span id="year"></span> Baganer Cha</div>
+      <div class="social"><a href="#">FB</a> <a href="#">IG</a></div>
+    </div>
+  </footer>
+
+  <script>
+    /* ==========================
+       PRODUCTS (min 16) - data-driven
+       Edit / extend these entries
+       ========================== */
+    const PRODUCTS = [
+      {id:1,title:'Sreemangal Classic Green',type:'Green',price:220,img:'https://images.unsplash.com/photo-1509460913899-8a6f0f0b0fb8?q=80&w=800&auto=format&fit=crop'},
+      {id:2,title:'Mild Breakfast Black',type:'Black',price:180,img:'https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?q=80&w=800&auto=format&fit=crop'},
+      {id:3,title:'Premium Golden Blend',type:'Premium',price:520,img:'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=800&auto=format&fit=crop'},
+      {id:4,title:'Chamomile Herbal',type:'Herbal',price:300,img:'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?q=80&w=800&auto=format&fit=crop'},
+      {id:5,title:'Jasmine Green',type:'Green',price:260,img:'https://images.unsplash.com/photo-1505576773344-03d5a6ffd9c6?q=80&w=800&auto=format&fit=crop'},
+      {id:6,title:'Assam Strong Black',type:'Black',price:200,img:'https://images.unsplash.com/photo-1497042151330-7a3ce2f7e9d9?q=80&w=800&auto=format&fit=crop'},
+      {id:7,title:'Silver Tips Premium',type:'Premium',price:760,img:'https://images.unsplash.com/photo-1511459761839-6586e86a3f4a?q=80&w=800&auto=format&fit=crop'},
+      {id:8,title:'Lemongrass Herbal',type:'Herbal',price:240,img:'https://images.unsplash.com/photo-1541592106381-8e70f4b3a9f0?q=80&w=800&auto=format&fit=crop'},
+      {id:9,title:'Mint Green',type:'Green',price:210,img:'https://images.unsplash.com/photo-1505575398956-a9bbf6e9a4d5?q=80&w=800&auto=format&fit=crop'},
+      {id:10,title:'Darjeeling Black',type:'Black',price:340,img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop'},
+      {id:11,title:'Organic Blend',type:'Premium',price:420,img:'https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=800&auto=format&fit=crop'},
+      {id:12,title:'Ginger Herbal',type:'Herbal',price:230,img:'https://images.unsplash.com/photo-1543778782-5dbe4f7b6b58?q=80&w=800&auto=format&fit=crop'},
+      {id:13,title:'Forest Green',type:'Green',price:250,img:'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=800&auto=format&fit=crop'},
+      {id:14,title:'Masala Black',type:'Black',price:210,img:'https://images.unsplash.com/photo-1512295767273-ac3a8b1b0b45?q=80&w=800&auto=format&fit=crop'},
+      {id:15,title:'Reserve Estate',type:'Premium',price:980,img:'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=800&auto=format&fit=crop'},
+      {id:16,title:'Tulsi Herbal',type:'Herbal',price:260,img:'https://images.unsplash.com/photo-1543248939-9b6b1b4e1a4f?q=80&w=800&auto=format&fit=crop'}
+    ];
+
+    /* ==========================
+       Small helpers & DOM refs
+       ========================== */
+    const productGrid = document.getElementById('productGrid');
+    const filterBar = document.getElementById('filterBar');
+    const loadMoreBtn = document.getElementById('loadMore');
+    const cartToggle = document.getElementById('cartToggle');
+    const cartPanel = document.getElementById('cartPanel');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartCountBadge = document.getElementById('cartCountBadge');
+    const visibleCountEl = document.getElementById('visibleCount');
+
+    let visibleLimit = 8; // initial
+    let currentFilter = 'all';
+
+    // Cart in localStorage
+    const CART_KEY = 'baganer_cart_v1';
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}');
+
+    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+    function getCartCount(){ return Object.values(cart).reduce((s,i)=>s+i.qty,0); }
+    function getCartTotal(){ return Object.values(cart).reduce((s,i)=>s + i.qty * i.price,0); }
+
+    /* ==========================
+       Render products
+       ========================== */
+    function renderProducts(){
+      productGrid.innerHTML = '';
+      const filtered = PRODUCTS.filter(p => currentFilter==='all' ? true : p.type === currentFilter);
+      visibleCountEl.textContent = filtered.length >= visibleLimit ? visibleLimit + '+' : filtered.length;
+      const toShow = filtered.slice(0, visibleLimit);
+      toShow.forEach(p => {
+        const card = document.createElement('article');card.className='card';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.title}"/>
+          <div style="margin-top:8px"><strong>${p.title}</strong><div class="price">৳ ${p.price}</div></div>
+          <button class="add-btn">Add</button>
+        `;
+        const btn = card.querySelector('.add-btn');
+        btn.addEventListener('click', ()=> addToCart(p));
+        productGrid.appendChild(card);
+      });
+      // Reveal animation via IntersectionObserver
+      revealOnScroll();
+    }
+
+    /* Filter controls */
+    filterBar.addEventListener('click', (e)=>{
+      const b = e.target.closest('.filter-btn'); if(!b) return;
+      filterBar.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      currentFilter = b.dataset.filter;
+      visibleLimit = 8; // reset
+      renderProducts();
+    });
+
+    loadMoreBtn.addEventListener('click', ()=>{
+      visibleLimit += 8; renderProducts();
+    });
+
+    /* ==========================
+       Cart functions
+       ========================== */
+    function addToCart(p){
+      if(!cart[p.id]) cart[p.id] = {...p, qty:0};
+      cart[p.id].qty += 1;
+      saveCart();
+      updateCartUI();
+      cartToggle.classList.add('bounce'); setTimeout(()=>cartToggle.classList.remove('bounce'),800);
+    }
+
+    function removeFromCart(id){ delete cart[id]; saveCart(); updateCartUI(); }
+    function changeQty(id,delta){ if(cart[id]){ cart[id].qty = Math.max(0,cart[id].qty + delta); if(cart[id].qty===0) delete cart[id]; saveCart(); updateCartUI(); }}
+
+    function updateCartUI(){
+      const count = getCartCount();
+      cartCountEl.textContent = count; cartCountBadge.textContent = count;
+      cartItemsEl.innerHTML = '';
+      Object.values(cart).forEach(i=>{
+        const el = document.createElement('div');el.className='cart-item';
+        el.innerHTML = `
+          <img src="${i.img}" style="width:64px;height:64px;object-fit:cover;border-radius:8px" />
+          <div style="flex:1">
+            <div style="font-weight:700">${i.title}</div>
+            <div style="color:rgba(11,61,22,0.6)">৳ ${i.price} x ${i.qty}</div>
+            <div style="margin-top:8px"><button onclick="changeQty(${i.id},-1)">-</button> <button onclick="changeQty(${i.id},1)">+</button> <button onclick="removeFromCart(${i.id})">Remove</button></div>
+          </div>
+        `;
+        cartItemsEl.appendChild(el);
+      });
+      cartTotalEl.textContent = '৳ ' + getCartTotal();
+    }
+
+    // Expose some helpers globally for inline button handlers
+    window.changeQty = changeQty; window.removeFromCart = removeFromCart;
+
+    cartToggle.addEventListener('click', ()=>{
+      cartPanel.classList.toggle('open');
+      cartPanel.setAttribute('aria-hidden', !cartPanel.classList.contains('open'));
+    });
+
+    /* ==========================
+       Intersection reveal animations
+       ========================== */
+    function revealOnScroll(){
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); obs.unobserve(en.target)} });
+      },{threshold:0.12});
+      document.querySelectorAll('.card').forEach(c=>obs.observe(c));
+      document.querySelectorAll('.icon-card').forEach(c=>obs.observe(c));
+    }
+
+    /* ==========================
+       Simple typed effect (hero)
+       ========================== */
+    (function typeHero(){
+      const el = document.getElementById('typed');
+      const text = el.textContent; el.textContent = '';
+      let i=0; function step(){ if(i<=text.length){ el.textContent = text.slice(0,i); i++; setTimeout(step, 30); } }
+      step();
+    })();
+
+    /* ==========================
+       Testimonials slider (auto)
+       ========================== */
+    (function slider(){
+      const slides = document.getElementById('slides'); let idx=0; setInterval(()=>{ idx = (idx+1) % slides.children.length; slides.style.transform = `translateX(-${idx*100}%)`; },4000);
+    })();
+
+    /* ==========================
+       Form submission + toast
+       ========================== */
+    document.getElementById('contactForm').addEventListener('submit', ()=>{});
+    document.querySelector('#contactForm button').addEventListener('click', ()=>{
+      const toast = document.getElementById('toast'); toast.style.display='block'; toast.textContent='Message sent — we will contact you soon.';
+      setTimeout(()=>toast.style.display='none',3000);
+      document.getElementById('contactForm').reset();
+    });
+
+    /* Newsletter */
+    document.getElementById('nlbtn').addEventListener('click', ()=>{ const v=document.getElementById('nlemail').value; alert('Thanks — subscribed: ' + v); document.getElementById('nlemail').value=''; });
+
+    /* Footer year */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* Parallax simple effect for hero image */
+    window.addEventListener('scroll', ()=>{
+      const h = document.querySelector('.hero');
+      const st = window.scrollY; h.style.backgroundPosition = `center ${st * 0.05}px`;
+      // header shrink
+      const header = document.getElementById('siteHeader');
+      if(window.scrollY > 80) header.classList.add('shrink'); else header.classList.remove('shrink');
+    });
+
+    /* Initial render */
+    renderProducts(); updateCartUI();
+
+    /* Accessibility: smooth scroll for anchor links */
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click', (e)=>{ e.preventDefault(); const id=a.getAttribute('href').slice(1); const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }));
+
+    /* Light-weight image lightbox for gallery */
+    document.querySelectorAll('.masonry img').forEach(img=>{
+      img.style.cursor='pointer'; img.addEventListener('click', ()=>{
+        const overlay = document.createElement('div'); overlay.style.position='fixed'; overlay.style.inset=0; overlay.style.background='rgba(0,0,0,0.8)'; overlay.style.display='flex'; overlay.style.alignItems='center'; overlay.style.justifyContent='center'; overlay.style.zIndex=2000; overlay.addEventListener('click', ()=>document.body.removeChild(overlay));
+        const large = document.createElement('img'); large.src = img.src; large.style.maxWidth='92%'; large.style.maxHeight='92%'; large.style.borderRadius='8px'; overlay.appendChild(large); document.body.appendChild(overlay);
+      });
+    });
+
+    /* Small UX: close cart panel on outside click */
+    document.addEventListener('click', (e)=>{
+      if(!cartPanel.classList.contains('open')) return;
+      if(!cartPanel.contains(e.target) && !cartToggle.contains(e.target)) cartPanel.classList.remove('open');
+    });
+
+    /* make icon-cards animate in sequence */
+    const iconCards = document.querySelectorAll('.icon-card');
+    iconCards.forEach((c,i)=>{ setTimeout(()=>c.style.transition='all .45s cubic-bezier(.2,.9,.3,1)', 100*i); });
+
+    /* Expose some debug console helpers */
+    window.PRODUCTS = PRODUCTS; window.cart = cart;
+
+  </script>
+
+</body>
+</html>
