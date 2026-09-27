@@ -1,568 +1,2210 @@
-<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Baganer Cha — Fresh & Premium Tea from Sreemangal" />
-  <title>Baganer Cha — Fresh & Premium Tea from Sreemangal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#03050c">
+<title>BLUE LOCK — Every Piece Creates the Ego</title>
+<meta name="description" content="A cinematic interactive experience. Scatter the pieces. Assemble the ego. Become the one who decides the game.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#03050c;
+  --ink-2:#070c18;
+  --ink-3:#0b1326;
+  --blue:#1150ff;
+  --blue-bright:#2f7bff;
+  --cyan:#3ae0ff;
+  --neon:#00d8ff;
+  --pink:#ff2e83;
+  --gold:#ffc73d;
+  --orange:#ff7a2f;
+  --violet:#8b5cff;
+  --white:#eef4ff;
+  --muted:#8ea3c4;
+  --line:rgba(120,160,255,.14);
+  --line-strong:rgba(120,160,255,.3);
+  --font-display:'Anton', 'Arial Narrow', Impact, sans-serif;
+  --font-cond:'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body:'Inter', system-ui, -apple-system, sans-serif;
+  --font-jp:'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  --nav-h:74px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
 
-  <!-- One google fonts link (serif for headings, sans for body) -->
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+*,*::before,*::after{box-sizing:border-box;}
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--white);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+img,svg,canvas{display:block;max-width:100%;}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--blue);color:#fff;}
 
-  <style>
-    /* ==========================
-       Variables & Reset
-       ========================== */
-    :root{
-      --lime:#a8e24a; /* main lime green */
-      --lime-strong:#7cca18;
-      --dark-green:#0b3d16;
-      --muted:#f5f7f5;
-      --glass: rgba(255,255,255,0.85);
-      --card-shadow: 0 8px 20px rgba(11,61,22,0.08);
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line-height:1.45;color:#0b2b16;background:white;
-      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-      overscroll-behavior-y: none;
-    }
-    h1,h2,h3{font-family:Merriweather,serif;color:var(--dark-green);margin:0}
-    p{margin:0}
+/* scrollbar */
+::-webkit-scrollbar{width:9px;}
+::-webkit-scrollbar-track{background:#04060e;}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--blue),#0a2a7a);border-radius:20px;}
 
-    /* ==========================
-       Layout & Header
-       ========================== */
-    .site-header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:space-between;padding:12px 18px;transition:all .28s cubic-bezier(.2,.9,.3,1);box-shadow:0 6px 18px rgba(10,10,10,0.04)}
-    .site-header.shrink{padding:6px 18px;transform:translateY(-2px)}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo .mark{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--lime),var(--lime-strong));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:Merriweather}
-    .nav{display:flex;gap:14px;align-items:center}
-    .nav a{color:var(--dark-green);text-decoration:none;font-weight:600;font-size:14px}
-    .burger{display:none}
+/* ============================================================
+   ATMOSPHERE
+   ============================================================ */
+#dust{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;
+}
+.grain{
+  position:fixed;inset:0;z-index:9;pointer-events:none;opacity:.045;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.cursor-glow{
+  position:fixed;width:520px;height:520px;border-radius:50%;
+  left:0;top:0;margin:-260px 0 0 -260px;z-index:8;pointer-events:none;
+  background:radial-gradient(circle, rgba(47,123,255,.13) 0%, rgba(58,224,255,.05) 42%, transparent 70%);
+  opacity:0;transition:opacity .5s ease;
+  will-change:transform;
+}
 
-    /* ==========================
-       Hero
-       ========================== */
-    .hero{min-height:72vh;display:grid;align-items:center;padding:36px 18px;position:relative;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,61,22,0.45), rgba(255,255,255,0.02)), radial-gradient(circle at 20% 20%, rgba(168,226,74,0.12), transparent 10%), linear-gradient(180deg, rgba(168,226,74,0.06), transparent 40%);z-index:0}
-    /* decorative animated leaves */
-    .leaf{position:absolute;width:180px;height:180px;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2));border-radius:50%;opacity:.06;transform:translateY(0);will-change:transform}
-    .leaf.l1{left:-40px;top:10%}
-    .leaf.l2{right:-60px;top:12%}
-    .leaf.l3{left:10%;bottom:-10%}
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:70;
+  border-bottom:1px solid transparent;
+  transition:background .45s ease, backdrop-filter .45s ease, border-color .45s ease;
+}
+.nav.solid{
+  background:rgba(3,5,12,.72);
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  border-bottom-color:var(--line);
+}
+.nav-inner{
+  max-width:1500px;margin:0 auto;
+  padding:14px 26px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0;}
+.brand-mark{width:38px;height:38px;filter:drop-shadow(0 0 12px rgba(58,224,255,.45));}
+.brand-text{display:flex;flex-direction:column;line-height:1;}
+.brand-text strong{
+  font-family:var(--font-display);font-size:19px;letter-spacing:.06em;
+  background:linear-gradient(100deg,#fff 10%,var(--cyan) 55%,var(--blue-bright));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.brand-text em{
+  font-family:var(--font-jp);font-style:normal;font-weight:900;
+  font-size:9px;letter-spacing:.34em;color:var(--muted);margin-top:3px;
+}
+.nav-links{display:flex;align-items:center;gap:4px;}
+.nav-links a{
+  position:relative;display:block;
+  font-family:var(--font-cond);font-weight:600;font-size:14px;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);padding:10px 14px;border-radius:8px;
+  transition:color .3s ease,background .3s ease;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:14px;right:14px;bottom:6px;height:1.5px;
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+}
+.nav-links a:hover{color:var(--white);background:rgba(47,123,255,.08);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a.active{color:#fff;}
+.nav-right{display:flex;align-items:center;gap:12px;}
 
-    .hero-inner{position:relative;z-index:10;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
-    .hero-copy h1{font-size:clamp(28px,4.6vw,48px);line-height:1.02}
-    .tagline{display:inline-block;color:var(--dark-green);font-weight:700}
-    .subtxt{margin-top:12px;color:rgba(11,43,18,0.85)}
-    .shop-btn{display:inline-block;margin-top:18px;padding:12px 18px;border-radius:12px;background:linear-gradient(90deg,var(--lime),var(--lime-strong));color:var(--dark-green);font-weight:700;text-decoration:none;box-shadow:0 8px 28px rgba(124,202,24,0.12);transition:all .22s}
-    .shop-btn:hover{transform:translateY(-4px);filter:brightness(1.02);box-shadow:0 14px 36px rgba(124,202,24,0.18)}
+.btn{
+  position:relative;display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--font-cond);font-weight:700;font-size:14px;
+  letter-spacing:.15em;text-transform:uppercase;
+  padding:12px 22px;border-radius:100px;overflow:hidden;
+  color:#fff;isolation:isolate;
+  background:linear-gradient(100deg,var(--blue),#0a2ea8);
+  box-shadow:0 6px 26px -8px rgba(17,80,255,.9), inset 0 1px 0 rgba(255,255,255,.22);
+  transition:transform .3s var(--ease), box-shadow .3s ease, filter .3s ease;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;z-index:-1;opacity:0;
+  background:linear-gradient(100deg,var(--cyan),var(--blue-bright),var(--violet));
+  transition:opacity .4s ease;
+}
+.btn::after{
+  content:'';position:absolute;top:0;bottom:0;width:60%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:translateX(-160%) skewX(-20deg);
+  transition:transform .7s var(--ease);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 38px -10px rgba(58,224,255,.8), inset 0 1px 0 rgba(255,255,255,.3);}
+.btn:hover::before{opacity:1;}
+.btn:hover::after{transform:translateX(260%) skewX(-20deg);}
+.btn:active{transform:translateY(0) scale(.98);}
+.btn-sm{padding:10px 18px;font-size:12.5px;}
+.btn-ghost{
+  background:transparent;border:1px solid var(--line-strong);
+  box-shadow:none;color:var(--muted);
+}
+.btn-ghost::before{background:linear-gradient(100deg,rgba(58,224,255,.9),rgba(17,80,255,.9));}
+.btn-ghost:hover{color:#fff;border-color:transparent;box-shadow:0 10px 30px -12px rgba(58,224,255,.75);}
 
-    /* animated typing underline */
-    .typing{border-right:3px solid rgba(11,61,22,0.9);padding-right:6px;white-space:nowrap;overflow:hidden}
+.burger{
+  display:none;width:44px;height:44px;border-radius:12px;
+  border:1px solid var(--line-strong);background:rgba(10,18,38,.6);
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  transition:background .3s ease,border-color .3s ease;
+}
+.burger span{
+  display:block;width:19px;height:2px;border-radius:2px;background:var(--white);
+  transition:transform .4s var(--ease),opacity .3s ease;
+}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;transform:scaleX(.3);}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-    /* hero image panel */
-    .hero-panel{background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));border-radius:18px;padding:18px;box-shadow:var(--card-shadow);display:flex;flex-direction:column;gap:12px}
-    .hero-panel img{width:100%;height:240px;object-fit:cover;border-radius:10px}
-    .badge{background:var(--lime-strong);color:white;padding:6px 10px;border-radius:999px;font-weight:700;display:inline-block}
+.progress-track{height:2px;background:rgba(255,255,255,.05);}
+.progress-track i{
+  display:block;height:100%;width:0%;
+  background:linear-gradient(90deg,var(--cyan),var(--blue),var(--violet));
+  box-shadow:0 0 14px rgba(58,224,255,.9);
+}
 
-    /* ==========================
-       Products
-       ========================== */
-    .products{padding:32px 18px;max-width:1200px;margin:0 auto}
-    .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-    .filter-btn{background:transparent;border:1px solid rgba(11,61,22,0.06);padding:8px 12px;border-radius:999px;font-weight:600;cursor:pointer;transition:all .18s}
-    .filter-btn.active{background:var(--lime);color:white;box-shadow:0 8px 20px rgba(124,202,24,0.08)}
-    .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-    .card{background:white;border-radius:12px;padding:12px;box-shadow:var(--card-shadow);overflow:visible;position:relative;transform:translateY(10px);opacity:0;transition:all .45s cubic-bezier(.2,.9,.3,1)}
-    .card.visible{transform:none;opacity:1}
-    .card img{width:100%;height:180px;object-fit:cover;border-radius:8px;transition:transform .28s}
-    .card:hover img{transform:scale(1.06)}
-    .price<img src="green-tea.png" alt="Green Tea">
-    .add-btn{position:absolute;right:14px;bottom:14px;background:var(--dark-green);color:white;padding:8px 12px;border-radius:999px;border:none;cursor:pointer;transform:translateY(12px);opacity:0;transition:all .22s}
-    .card:hover .add-btn{transform:none;opacity:1}
+/* mobile drawer */
+.mobile-menu{
+  position:fixed;inset:0;z-index:65;
+  background:radial-gradient(120% 90% at 50% 0%,rgba(17,80,255,.22),transparent 60%),rgba(3,5,12,.97);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:100px 32px 48px;
+  clip-path:circle(0% at calc(100% - 48px) 42px);
+  transition:clip-path .7s var(--ease);
+  pointer-events:none;
+}
+.mobile-menu.open{clip-path:circle(150% at calc(100% - 48px) 42px);pointer-events:auto;}
+.mobile-menu a{
+  font-family:var(--font-display);font-size:clamp(34px,11vw,58px);
+  letter-spacing:.02em;line-height:1.1;color:var(--white);
+  padding:12px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:baseline;gap:14px;
+  opacity:0;transform:translateY(28px);
+  transition:opacity .5s ease,transform .6s var(--ease),color .3s ease;
+}
+.mobile-menu.open a{opacity:1;transform:none;}
+.mobile-menu a:nth-child(1){transition-delay:.09s;}
+.mobile-menu a:nth-child(2){transition-delay:.15s;}
+.mobile-menu a:nth-child(3){transition-delay:.21s;}
+.mobile-menu a:nth-child(4){transition-delay:.27s;}
+.mobile-menu a:nth-child(5){transition-delay:.33s;}
+.mobile-menu a:hover{color:var(--cyan);}
+.mobile-menu a span{font-family:var(--font-cond);font-size:13px;letter-spacing:.2em;color:var(--cyan);}
+.mobile-menu .mm-foot{margin-top:40px;display:flex;flex-wrap:wrap;gap:12px;opacity:0;transition:opacity .5s ease .4s;}
+.mobile-menu.open .mm-foot{opacity:1;}
 
-    /* Load more */
-    .load-more{display:block;margin:22px auto;padding:12px 20px;border-radius:12px;background:linear-gradient(90deg,var(--lime),var(--lime-strong));border:none;font-weight:700;cursor:pointer}
+/* ============================================================
+   STAGE (fixed puzzle universe)
+   ============================================================ */
+.stage{
+  position:fixed;inset:0;z-index:2;
+  perspective:1500px;
+  perspective-origin:50% 44%;
+  overflow:hidden;
+  pointer-events:none;
+}
+.stage.hidden{visibility:hidden;}
+.puzzle-layer{
+  position:absolute;inset:0;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.pz{
+  position:absolute;left:0;top:0;
+  background-repeat:no-repeat;
+  backface-visibility:visible;
+  box-shadow:inset 0 0 0 1px rgba(3,6,14,.85);
+  will-change:transform,opacity;
+  transform-origin:50% 50%;
+}
+.stage.assembled .pz{box-shadow:none;}
 
-    /* ==========================
-       Cart Sidebar
-       ========================== */
-    .cart-toggle{position:fixed;right:18px;bottom:18px;width:64px;height:64px;border-radius:16px;background:linear-gradient(180deg,var(--lime),var(--lime-strong));display:flex;align-items:center;justify-content:center;z-index:80;box-shadow:0 12px 30px rgba(10,10,10,0.12);cursor:pointer}
-    .cart-toggle .count{position:absolute;top:-6px;right:-6px;background:#ff4757;color:white;padding:6px 8px;border-radius:999px;font-weight:700;font-size:13px}
-    .cart-panel{position:fixed;right:0;top:0;height:100vh;width:380px;max-width:92%;background:linear-gradient(180deg,white, #fbfff8);box-shadow:-18px 0 40px rgba(10,10,10,0.08);transform:translateX(110%);transition:transform .36s cubic-bezier(.2,.9,.3,1);z-index:90;padding:18px;overflow:auto}
-    .cart-panel.open{transform:translateX(0)}
-    .cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(11,61,22,0.06)}
+.vignette{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 45%, transparent 42%, rgba(3,5,12,.55) 78%, rgba(3,5,12,.95) 100%),
+    linear-gradient(180deg, rgba(3,5,12,.85) 0%, transparent 22%, transparent 74%, rgba(3,5,12,.92) 100%);
+}
 
-    /* ==========================
-       About & Why Us
-       ========================== */
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;padding:36px 18px;max-width:1200px;margin:0 auto}
-    .story p{margin-top:12px}
-    .icons-grid{display:flex;gap:16px;flex-wrap:wrap}
-    .icon-card{flex:1 1 180px;background:linear-gradient(180deg,white,#fbfff8);padding:18px;border-radius:12px;box-shadow:var(--card-shadow);transform:translateY(18px);opacity:0}
+/* HERO */
+.hero{
+  position:absolute;inset:0;z-index:3;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:calc(var(--nav-h) + 10px) 22px 90px;
+  will-change:opacity,transform;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 62% 46% at 50% 46%, rgba(3,5,12,.82), rgba(3,5,12,.35) 55%, transparent 78%);
+}
+.hero>*{position:relative;}
+.hero-kicker{
+  font-family:var(--font-cond);font-weight:600;font-size:12.5px;
+  letter-spacing:.42em;text-transform:uppercase;color:var(--cyan);
+  display:flex;align-items:center;gap:12px;margin-bottom:22px;
+  opacity:0;animation:fadeUp .9s var(--ease) .25s forwards;
+}
+.hero-kicker::before,.hero-kicker::after{
+  content:'';width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--cyan));
+}
+.hero-kicker::after{background:linear-gradient(90deg,var(--cyan),transparent);}
+.hero-title{
+  margin:0;font-family:var(--font-display);
+  font-size:clamp(3.2rem,14.5vw,12.5rem);
+  line-height:.86;letter-spacing:-.012em;text-transform:uppercase;
+  background:linear-gradient(178deg,#ffffff 12%,#bcd9ff 42%,#2f7bff 78%,#0a2ea8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 12px 60px rgba(17,80,255,.55));
+  opacity:0;animation:fadeUp 1.1s var(--ease) .38s forwards;
+}
+.hero-jp{
+  font-family:var(--font-jp);font-weight:900;
+  font-size:clamp(.85rem,2.6vw,1.6rem);
+  letter-spacing:.5em;color:rgba(238,244,255,.72);margin-top:14px;
+  text-indent:.5em;
+  opacity:0;animation:fadeUp 1s var(--ease) .55s forwards;
+}
+.hero-sub{
+  font-family:var(--font-cond);font-weight:500;
+  font-size:clamp(.95rem,2.2vw,1.35rem);
+  letter-spacing:.3em;text-transform:uppercase;color:var(--muted);
+  margin:26px 0 0;
+  opacity:0;animation:fadeUp 1s var(--ease) .7s forwards;
+}
+.scroll-cue{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  opacity:0;animation:fadeUp 1s var(--ease) 1s forwards;
+}
+.scroll-cue span{
+  font-family:var(--font-cond);font-weight:600;font-size:11.5px;
+  letter-spacing:.4em;text-transform:uppercase;color:var(--muted);
+}
+.scroll-cue i{
+  display:block;width:1px;height:52px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,transparent,var(--line-strong));
+}
+.scroll-cue i::after{
+  content:'';position:absolute;left:0;top:-60%;width:100%;height:60%;
+  background:linear-gradient(180deg,transparent,var(--cyan));
+  animation:cueDrop 2.1s cubic-bezier(.6,0,.4,1) infinite;
+}
+@keyframes cueDrop{0%{top:-60%;}70%{top:100%;}100%{top:100%;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
 
-    /* ==========================
-       Testimonials
-       ========================== */
-    .testimonials{padding:36px 18px;background:linear-gradient(180deg, rgba(168,226,74,0.03), transparent)}
-    .test-slider{max-width:900px;margin:0 auto;position:relative;overflow:hidden}
-    .slides{display:flex;transition:transform .6s ease}
-    .slide{min-width:100%;padding:18px}
+/* REVEAL overlay (after assembly) */
+.reveal{
+  position:absolute;left:0;right:0;bottom:0;z-index:4;
+  padding:120px 26px 52px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;
+  background:linear-gradient(180deg,transparent,rgba(3,5,12,.86) 62%,rgba(3,5,12,.97));
+  opacity:0;will-change:opacity,transform;pointer-events:none;
+}
+.reveal h2{
+  margin:0;font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(1.55rem,4.4vw,3.4rem);line-height:1;letter-spacing:.005em;
+  color:#fff;text-shadow:0 0 44px rgba(17,80,255,.6);
+}
+.reveal h2 b{
+  font-weight:400;
+  background:linear-gradient(100deg,var(--cyan),var(--blue-bright) 55%,var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.reveal-meta{
+  font-family:var(--font-cond);font-weight:600;font-size:12px;
+  letter-spacing:.4em;text-transform:uppercase;color:var(--muted);margin-top:6px;
+}
+.reveal-rule{
+  width:min(340px,60vw);height:2px;margin-top:16px;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--blue),transparent);
+  box-shadow:0 0 18px rgba(58,224,255,.8);
+  transform:scaleX(0);transform-origin:center;
+}
+.reveal.on .reveal-rule{transform:scaleX(1);transition:transform 1.1s var(--ease);}
+.assembly-meter{
+  position:absolute;right:26px;top:50%;transform:translateY(-50%);
+  z-index:4;display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;transition:opacity .5s ease;
+}
+.assembly-meter.on{opacity:1;}
+.assembly-meter .am-track{
+  width:3px;height:180px;border-radius:3px;background:rgba(255,255,255,.09);overflow:hidden;
+}
+.assembly-meter .am-fill{
+  width:100%;height:0%;border-radius:3px;
+  background:linear-gradient(180deg,var(--cyan),var(--blue));
+  box-shadow:0 0 16px rgba(58,224,255,.9);
+  transition:height .18s linear;
+}
+.assembly-meter span{
+  font-family:var(--font-cond);font-weight:700;font-size:11px;
+  letter-spacing:.2em;color:var(--cyan);
+  writing-mode:vertical-rl;
+}
+.assembly-meter b{font-size:15px;color:#fff;display:block;}
 
-    /* ==========================
-       Blog & Gallery
-       ========================== */
-    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .masonry{column-count:3;column-gap:12px}
-    .masonry img{width:100%;break-inside:avoid;margin-bottom:12px;border-radius:8px}
+/* ============================================================
+   CONTENT
+   ============================================================ */
+.spacer{position:relative;z-index:1;pointer-events:none;}
+.content{position:relative;z-index:5;background:var(--ink);}
+.sec{
+  position:relative;
+  padding:clamp(72px,11vw,150px) 26px;
+  scroll-margin-top:var(--nav-h);
+  overflow:hidden;
+}
+.wrap{max-width:1360px;margin:0 auto;position:relative;}
+.sec-first{
+  padding-top:clamp(80px,12vw,150px);
+  background:linear-gradient(180deg, rgba(3,5,12,0) 0%, var(--ink) 16%);
+}
+.sec-label{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--font-cond);font-weight:600;font-size:12.5px;
+  letter-spacing:.36em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:22px;
+}
+.sec-label i{
+  font-style:normal;font-family:var(--font-display);
+  color:var(--cyan);font-size:14px;letter-spacing:.04em;
+  text-shadow:0 0 18px rgba(58,224,255,.7);
+}
+.sec-label::after{content:'';width:60px;height:1px;background:linear-gradient(90deg,var(--line-strong),transparent);}
 
-    /* ==========================
-       Contact & Footer
-       ========================== */
-    .contact{padding:36px 18px;max-width:900px;margin:0 auto}
-    .contact form{display:grid;gap:12px}
-    .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:var(--dark-green);color:white;padding:10px 14px;border-radius:8px;display:none}
+.display{
+  font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(2rem,6.6vw,5.4rem);line-height:.94;letter-spacing:-.005em;
+  margin:0 0 26px;
+}
+.display .accent{
+  background:linear-gradient(100deg,var(--cyan),var(--blue-bright) 50%,var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 32px rgba(58,224,255,.35));
+}
+.display .pink{
+  background:linear-gradient(100deg,var(--pink),var(--orange));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{
+  font-size:clamp(1rem,1.5vw,1.16rem);
+  color:#b9c8e4;max-width:62ch;line-height:1.75;margin:0;
+}
+.lede strong{color:#fff;font-weight:600;}
 
-    footer{background:#06220f;color:rgba(255,255,255,0.9);padding:28px 18px}
-    footer .cols{display:flex;gap:18px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
-    .social a{display:inline-block;margin-right:8px}
+/* reveal animation */
+.rv{opacity:0;transform:translateY(38px);transition:opacity .9s ease,transform 1s var(--ease);transition-delay:var(--d,0s);}
+.rv.in{opacity:1;transform:none;}
 
-    /* ==========================
-       Responsive
-       ========================== */
-    @media(max-width:1100px){.product-grid{grid-template-columns:repeat(3,1fr)}.hero-inner{grid-template-columns:1fr 340px}}
-    @media(max-width:860px){.product-grid{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}.hero-inner{grid-template-columns:1fr}.nav{display:none}.burger{display:block}}
-    @media(max-width:520px){.product-grid{grid-template-columns:1fr}.hero{min-height:62vh}.hero-panel img{height:160px}}
+/* marquee */
+.marquee{
+  position:relative;z-index:1;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,rgba(17,80,255,.09),rgba(58,224,255,.06),rgba(139,92,255,.09));
+  padding:18px 0;overflow:hidden;
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.marquee-track{display:flex;width:max-content;animation:marq 32s linear infinite;}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+.marquee-track span{
+  font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(1.1rem,2.6vw,2.05rem);letter-spacing:.06em;
+  padding:0 26px;display:flex;align-items:center;gap:26px;white-space:nowrap;
+  color:rgba(238,244,255,.9);
+}
+.marquee-track span em{
+  font-style:normal;
+  background:linear-gradient(100deg,var(--cyan),var(--blue-bright));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.marquee-track span::after{
+  content:'';width:9px;height:9px;border-radius:2px;transform:rotate(45deg);
+  background:var(--cyan);box-shadow:0 0 14px var(--cyan);flex-shrink:0;
+}
+@keyframes marq{to{transform:translateX(-50%);}}
 
-    /* ==========================
-       Small animations
-       ========================== */
-    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-16px)}100%{transform:translateY(0)}}
-    .leaf{animation:floaty 9s ease-in-out infinite}
-    .bounce{animation:bounce .8s ease}
-    @keyframes bounce{0%{transform:translateY(0)}30%{transform:translateY(-8px)}60%{transform:translateY(0)}100%{transform:translateY(0)}}
+/* EGO section */
+.ego-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);
+  align-items:start;margin-top:26px;
+}
+.pillars{display:grid;gap:14px;}
+.pillar{
+  position:relative;padding:22px 24px 22px 26px;border-radius:16px;
+  background:linear-gradient(120deg,rgba(11,19,38,.9),rgba(7,12,24,.6));
+  border:1px solid var(--line);overflow:hidden;
+  transition:transform .45s var(--ease),border-color .4s ease,background .4s ease;
+}
+.pillar::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,var(--cyan),var(--blue));
+  box-shadow:0 0 18px rgba(58,224,255,.9);
+  transform:scaleY(.32);transform-origin:top;transition:transform .5s var(--ease);
+}
+.pillar:hover{transform:translateX(6px);border-color:var(--line-strong);background:linear-gradient(120deg,rgba(16,28,58,.95),rgba(9,15,30,.7));}
+.pillar:hover::before{transform:scaleY(1);}
+.pillar h4{
+  margin:0 0 6px;font-family:var(--font-cond);font-weight:700;
+  font-size:1.18rem;letter-spacing:.1em;text-transform:uppercase;
+}
+.pillar p{margin:0;color:var(--muted);font-size:.92rem;line-height:1.6;}
+.pillar .p-index{
+  position:absolute;right:18px;top:12px;font-family:var(--font-display);
+  font-size:2.6rem;line-height:1;color:rgba(120,160,255,.1);
+}
 
-  </style>
+/* ============================================================
+   PLAYERS
+   ============================================================ */
+.player-layout{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(22px,3.4vw,44px);
+  margin-top:30px;align-items:start;
+}
+.p-card{
+  position:relative;border-radius:22px;overflow:hidden;
+  border:1px solid var(--line);
+  background:linear-gradient(150deg,rgba(11,19,38,.96),rgba(5,8,18,.9));
+  display:grid;grid-template-columns:minmax(150px,34%) 1fr;
+  min-height:398px;
+  box-shadow:0 40px 90px -50px rgba(17,80,255,.9);
+}
+.p-card-bg{
+  position:absolute;inset:0;opacity:.55;pointer-events:none;
+  background:
+    radial-gradient(90% 70% at 8% 10%, var(--c1,#1150ff) -30%, transparent 62%),
+    radial-gradient(80% 80% at 96% 96%, var(--c2,#3ae0ff) -20%, transparent 62%);
+  transition:background .6s ease;
+}
+.p-card.swap .p-card-body,.p-card.swap .p-card-avatar{opacity:0;transform:translateY(14px);}
+.p-card-body,.p-card-avatar{transition:opacity .3s ease,transform .35s var(--ease);}
+
+.p-card-avatar{
+  position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  border-right:1px solid var(--line);
+  overflow:hidden;
+}
+.p-card-avatar::before{
+  content:'';position:absolute;inset:-30%;
+  background:repeating-conic-gradient(from 0deg,
+    rgba(255,255,255,.10) 0deg 1.1deg, transparent 1.1deg 8deg);
+  animation:spinSlow 70s linear infinite;
+  mask-image:radial-gradient(circle at 50% 50%, #000 12%, transparent 68%);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 12%, transparent 68%);
+}
+@keyframes spinSlow{to{transform:rotate(360deg);}}
+.p-card-avatar .kanji{
+  position:relative;font-family:var(--font-jp);font-weight:900;
+  font-size:clamp(4.2rem,10vw,7rem);line-height:1;
+  color:#fff;text-shadow:0 0 46px rgba(255,255,255,.35);
+  mix-blend-mode:overlay;
+}
+.p-card-avatar .num{
+  position:absolute;bottom:-8px;left:8px;font-family:var(--font-display);
+  font-size:5.6rem;line-height:.8;color:rgba(255,255,255,.13);
+  letter-spacing:-.04em;
+}
+.p-card-body{position:relative;z-index:1;padding:30px 30px 30px;}
+.p-tag{
+  display:inline-block;font-family:var(--font-cond);font-weight:700;
+  font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+  padding:6px 12px;border-radius:100px;
+  color:#04101f;background:linear-gradient(100deg,var(--cyan),#7bd9ff);
+  box-shadow:0 0 26px -6px rgba(58,224,255,.9);
+}
+.p-name{
+  font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(1.6rem,3.6vw,2.5rem);line-height:1;margin:14px 0 4px;letter-spacing:.005em;
+}
+.p-jp{font-family:var(--font-jp);font-weight:700;font-size:.88rem;letter-spacing:.22em;color:var(--muted);}
+.p-role{
+  font-family:var(--font-cond);font-weight:600;font-size:.86rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-top:14px;
+}
+.p-quote{
+  margin:16px 0 22px;padding-left:16px;border-left:2px solid var(--line-strong);
+  font-size:.94rem;color:#b9c8e4;font-style:italic;line-height:1.6;
+}
+.p-stats{display:grid;gap:9px;}
+.stat{display:grid;grid-template-columns:88px 1fr 32px;align-items:center;gap:10px;}
+.stat-label{
+  font-family:var(--font-cond);font-weight:600;font-size:11.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+}
+.stat-bar{height:5px;border-radius:4px;background:rgba(255,255,255,.07);overflow:hidden;}
+.stat-bar i{
+  display:block;height:100%;width:0;border-radius:4px;
+  background:linear-gradient(90deg,var(--c1,#3ae0ff),var(--c2,#1150ff));
+  box-shadow:0 0 12px rgba(58,224,255,.55);
+  transition:width 1s var(--ease);
+}
+.stat-bar i.go{width:var(--v);}
+.stat-val{font-family:var(--font-cond);font-weight:700;font-size:12.5px;color:#fff;text-align:right;}
+
+.player-list{display:grid;gap:10px;}
+.p-nav-btns{display:flex;gap:10px;margin-bottom:6px;}
+.p-nav-btns button{
+  width:44px;height:44px;border-radius:12px;border:1px solid var(--line);
+  background:rgba(11,19,38,.7);display:grid;place-items:center;
+  color:var(--muted);transition:all .3s var(--ease);
+}
+.p-nav-btns button:hover{color:#fff;border-color:var(--cyan);background:rgba(17,80,255,.2);transform:translateY(-2px);}
+.p-item{
+  display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:14px;
+  padding:13px 16px;border-radius:14px;width:100%;text-align:left;
+  border:1px solid var(--line);
+  background:linear-gradient(100deg,rgba(11,19,38,.7),rgba(6,10,22,.4));
+  transition:transform .35s var(--ease),border-color .3s ease,background .3s ease;
+  position:relative;overflow:hidden;
+}
+.p-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--c1),var(--c2));
+  transform:scaleY(0);transform-origin:center;transition:transform .4s var(--ease);
+}
+.p-item:hover{transform:translateX(5px);border-color:var(--line-strong);background:linear-gradient(100deg,rgba(17,32,64,.9),rgba(9,14,28,.5));}
+.p-item.active{border-color:rgba(58,224,255,.5);background:linear-gradient(100deg,rgba(20,40,86,.95),rgba(10,18,36,.6));}
+.p-item.active::before{transform:scaleY(1);}
+.p-item .pi-num{
+  font-family:var(--font-display);font-size:1.35rem;line-height:1;
+  color:transparent;background:linear-gradient(120deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;background-clip:text;
+  text-align:center;
+}
+.p-item .pi-name{font-family:var(--font-cond);font-weight:700;font-size:1.06rem;letter-spacing:.08em;text-transform:uppercase;line-height:1.15;}
+.p-item .pi-role{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-family:var(--font-cond);font-weight:500;}
+.p-item .pi-kanji{font-family:var(--font-jp);font-weight:900;font-size:1rem;color:rgba(160,195,255,.35);}
+
+/* ============================================================
+   FIELD
+   ============================================================ */
+.field-layout{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.4vw,46px);
+  align-items:start;margin-top:30px;
+}
+.pitch-frame{
+  position:relative;border-radius:22px;overflow:hidden;
+  border:1px solid var(--line);
+  background:#050b18;
+  box-shadow:0 40px 100px -50px rgba(17,80,255,.9), inset 0 0 80px rgba(17,80,255,.06);
+  padding:12px;
+}
+.pitch{position:relative;width:100%;aspect-ratio:3/4;max-height:600px;margin:0 auto;}
+.pitch svg{position:absolute;inset:0;width:100%;height:100%;border-radius:14px;}
+.marker{
+  position:absolute;width:38px;height:38px;margin:-19px 0 0 -19px;
+  border-radius:50%;display:grid;place-items:center;
+  font-family:var(--font-cond);font-weight:700;font-size:13px;color:#02101f;
+  border:2px solid rgba(255,255,255,.85);
+  background:linear-gradient(140deg,var(--c1),var(--c2));
+  box-shadow:0 6px 20px -6px rgba(0,0,0,.9), 0 0 0 0 rgba(58,224,255,.55);
+  transition:left .65s var(--ease),top .65s var(--ease),transform .3s var(--ease),box-shadow .3s ease;
+  z-index:2;cursor:pointer;
+}
+.marker:hover{transform:scale(1.16);z-index:5;}
+.marker.active{
+  transform:scale(1.22);z-index:6;
+  box-shadow:0 8px 26px -6px rgba(0,0,0,.95), 0 0 0 6px rgba(58,224,255,.18);
+}
+.marker .mk-name{
+  position:absolute;top:110%;left:50%;transform:translateX(-50%);
+  font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#dce8ff;
+  white-space:nowrap;background:rgba(3,5,12,.8);padding:2px 7px;border-radius:20px;
+  border:1px solid var(--line);font-weight:600;opacity:0;transition:opacity .3s ease;
+  pointer-events:none;
+}
+.marker:hover .mk-name,.marker.active .mk-name{opacity:1;}
+
+.field-side{display:grid;gap:18px;}
+.formation-tabs{display:flex;gap:8px;flex-wrap:wrap;}
+.formation-tabs button{
+  font-family:var(--font-cond);font-weight:700;font-size:13px;letter-spacing:.16em;
+  padding:10px 18px;border-radius:100px;border:1px solid var(--line);
+  color:var(--muted);background:rgba(11,19,38,.6);
+  transition:all .3s var(--ease);
+}
+.formation-tabs button:hover{color:#fff;border-color:var(--line-strong);transform:translateY(-2px);}
+.formation-tabs button.active{
+  color:#02101f;border-color:transparent;
+  background:linear-gradient(100deg,var(--cyan),var(--blue-bright));
+  box-shadow:0 8px 26px -10px rgba(58,224,255,.95);
+}
+.finfo{
+  position:relative;border-radius:20px;border:1px solid var(--line);
+  background:linear-gradient(150deg,rgba(11,19,38,.95),rgba(5,8,18,.85));
+  padding:26px;overflow:hidden;min-height:290px;
+}
+.finfo::before{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:radial-gradient(80% 70% at 100% 0%, var(--c1,#1150ff) -30%, transparent 60%);
+  transition:background .5s ease;
+}
+.finfo>*{position:relative;}
+.finfo .fi-num{
+  font-family:var(--font-display);font-size:4.4rem;line-height:.85;
+  color:transparent;background:linear-gradient(120deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 0 26px rgba(58,224,255,.4));
+}
+.finfo h3{font-family:var(--font-display);text-transform:uppercase;font-size:1.9rem;line-height:1;margin:10px 0 3px;}
+.finfo .fi-jp{font-family:var(--font-jp);font-weight:700;font-size:.8rem;letter-spacing:.22em;color:var(--muted);}
+.finfo .fi-role{
+  display:inline-block;margin-top:14px;
+  font-family:var(--font-cond);font-weight:700;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;padding:6px 12px;border-radius:100px;
+  border:1px solid var(--line-strong);color:var(--cyan);
+}
+.finfo p{margin:16px 0 0;color:#b0c1de;font-size:.92rem;line-height:1.65;}
+.finfo .fi-bars{display:grid;gap:8px;margin-top:18px;}
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+.quiz-shell{
+  margin-top:34px;border-radius:24px;border:1px solid var(--line);
+  background:linear-gradient(150deg,rgba(10,17,36,.95),rgba(4,7,16,.9));
+  padding:clamp(24px,4vw,48px);position:relative;overflow:hidden;
+  box-shadow:0 50px 110px -60px rgba(17,80,255,.95);
+}
+.quiz-shell::before{
+  content:'';position:absolute;top:-40%;right:-20%;width:70%;height:120%;
+  background:radial-gradient(circle,rgba(17,80,255,.25),transparent 62%);
+  pointer-events:none;
+}
+.quiz-head{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;position:relative;}
+.quiz-step{
+  font-family:var(--font-cond);font-weight:700;font-size:12px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--muted);
+}
+.quiz-step b{color:var(--cyan);}
+.quiz-dots{display:flex;gap:7px;}
+.quiz-dots i{
+  width:26px;height:3px;border-radius:3px;background:rgba(255,255,255,.12);
+  transition:background .4s ease,box-shadow .4s ease;
+}
+.quiz-dots i.on{background:linear-gradient(90deg,var(--cyan),var(--blue));box-shadow:0 0 12px rgba(58,224,255,.85);}
+.quiz-q{
+  font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(1.35rem,3.3vw,2.3rem);line-height:1.08;
+  margin:22px 0 26px;position:relative;max-width:22ch;
+}
+.quiz-options{display:grid;gap:12px;position:relative;}
+.opt{
+  display:flex;align-items:center;gap:16px;text-align:left;width:100%;
+  padding:19px 22px;border-radius:16px;
+  border:1px solid var(--line);
+  background:linear-gradient(100deg,rgba(12,21,42,.75),rgba(6,10,22,.5));
+  transition:transform .35s var(--ease),border-color .3s ease,background .3s ease;
+  opacity:0;transform:translateY(16px);animation:optIn .55s var(--ease) forwards;
+}
+@keyframes optIn{to{opacity:1;transform:none;}}
+.opt:nth-child(1){animation-delay:.04s;}
+.opt:nth-child(2){animation-delay:.1s;}
+.opt:nth-child(3){animation-delay:.16s;}
+.opt .opt-key{
+  flex-shrink:0;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  font-family:var(--font-cond);font-weight:700;font-size:13px;
+  border:1px solid var(--line-strong);color:var(--cyan);
+  background:rgba(58,224,255,.07);
+  transition:all .3s ease;
+}
+.opt .opt-text{font-size:1rem;color:#dbe6fb;line-height:1.5;}
+.opt:hover{transform:translateX(7px);border-color:rgba(58,224,255,.55);background:linear-gradient(100deg,rgba(20,40,86,.9),rgba(9,15,30,.6));}
+.opt:hover .opt-key{background:linear-gradient(120deg,var(--cyan),var(--blue));color:#03101f;border-color:transparent;}
+.opt:active{transform:translateX(4px) scale(.995);}
+
+.quiz-result{
+  position:relative;display:none;gap:26px;
+  grid-template-columns:auto 1fr;align-items:start;
+}
+.quiz-result.on{display:grid;animation:optIn .7s var(--ease) forwards;opacity:0;}
+.result-badge{
+  width:118px;height:118px;border-radius:26px;display:grid;place-items:center;
+  font-family:var(--font-jp);font-weight:900;font-size:3rem;color:#02101f;
+  background:linear-gradient(140deg,var(--rc1,#3ae0ff),var(--rc2,#1150ff));
+  box-shadow:0 24px 60px -20px rgba(58,224,255,.9);
+}
+.result-body h3{font-family:var(--font-display);text-transform:uppercase;font-size:clamp(1.5rem,3.2vw,2.2rem);line-height:1;margin:0 0 8px;}
+.result-body .rb-type{
+  font-family:var(--font-cond);font-weight:700;font-size:12px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--cyan);margin-bottom:14px;
+}
+.result-body p{color:#b0c1de;margin:0 0 20px;max-width:56ch;}
+.result-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+/* ============================================================
+   CTA + FOOTER
+   ============================================================ */
+.cta{
+  position:relative;text-align:center;overflow:hidden;
+  border-top:1px solid var(--line);
+  background:
+    radial-gradient(90% 100% at 50% 100%, rgba(17,80,255,.3), transparent 62%),
+    linear-gradient(180deg, var(--ink), #050a17);
+}
+.cta .display{font-size:clamp(2.2rem,8vw,6.4rem);line-height:.9;}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px;}
+.footer{
+  border-top:1px solid var(--line);
+  padding:52px 26px 40px;background:#03050c;position:relative;z-index:1;
+}
+.footer-inner{
+  max-width:1360px;margin:0 auto;
+  display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:34px;
+}
+.footer h5{
+  font-family:var(--font-cond);font-weight:700;font-size:12px;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 16px;
+}
+.footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;}
+.footer li a{font-size:.93rem;color:#9fb1cf;transition:color .25s ease,transform .3s var(--ease);display:inline-block;}
+.footer li a:hover{color:var(--cyan);transform:translateX(5px);}
+.footer .f-brand p{color:var(--muted);font-size:.9rem;max-width:38ch;margin:14px 0 0;line-height:1.7;}
+.foot-bar{
+  max-width:1360px;margin:44px auto 0;padding-top:22px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:var(--font-cond);font-weight:500;font-size:12px;letter-spacing:.18em;
+  text-transform:uppercase;color:#6a7d9c;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .ego-grid{grid-template-columns:1fr;}
+  .player-layout{grid-template-columns:1fr;}
+  .field-layout{grid-template-columns:1fr;}
+  .p-card{grid-template-columns:minmax(120px,30%) 1fr;}
+}
+@media (max-width:860px){
+  .nav-links{display:none;}
+  .burger{display:flex;}
+  .nav-right .btn{display:none;}
+  .p-card{grid-template-columns:1fr;}
+  .p-card-avatar{border-right:none;border-bottom:1px solid var(--line);min-height:190px;}
+  .p-card-avatar .num{font-size:4.6rem;}
+  .field-layout .pitch{max-height:none;}
+}
+@media (max-width:600px){
+  .sec{padding-left:18px;padding-right:18px;}
+  .nav-inner{padding:11px 16px;}
+  .brand-text strong{font-size:16px;}
+  .stat{grid-template-columns:74px 1fr 30px;gap:8px;}
+  .quiz-result{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:26px;}
+  .footer-inner .f-brand{grid-column:1/-1;}
+  .assembly-meter{right:8px;}
+  .assembly-meter .am-track{height:120px;}
+  .hero{padding-bottom:110px;}
+  .reveal{padding-bottom:38px;}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+  html{scroll-behavior:auto;}
+}
+</style>
 </head>
-<body>
+<body id="top">
 
-  <!-- Header -->
-  <header class="site-header" id="siteHeader">
-    <div class="logo" aria-hidden>
-      <div class="mark">BC</div>
-      <div>
-        <div style="font-weight:700">Baganer Cha</div>
-        <div style="font-size:12px;color:rgba(11,61,22,0.5)">Fresh from Sreemangal</div>
-      </div>
-    </div>
+<canvas id="dust" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-    <nav class="nav" aria-label="Primary Navigation">
-      <a href="#home">Home</a>
-      <a href="#shop">Shop</a>
-      <a href="#about">About</a>
-      <a href="#why">Why Us</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#blog">Blog</a>
-      <a href="#contact">Contact</a>
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Blue Lock home">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <defs>
+          <linearGradient id="bgA" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#3ae0ff"/><stop offset="1" stop-color="#1150ff"/>
+          </linearGradient>
+        </defs>
+        <polygon points="20,2.5 35,11 35,29 20,37.5 5,29 5,11" fill="none" stroke="url(#bgA)" stroke-width="1.8"/>
+        <polygon points="20,11 28.5,16 28.5,24.5 20,29.5 11.5,24.5 11.5,16" fill="url(#bgA)" opacity=".92"/>
+        <polygon points="20,15.5 24.8,18.3 24.8,23.2 20,26 15.2,23.2 15.2,18.3" fill="#03050c" opacity=".75"/>
+      </svg>
+      <span class="brand-text">
+        <strong>BLUE LOCK</strong>
+        <em>ブルーロック</em>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="#ego" data-nav>EGO</a>
+      <a href="#players" data-nav>PLAYERS</a>
+      <a href="#field" data-nav>THE FIELD</a>
+      <a href="#choice" data-nav>YOUR EGO</a>
     </nav>
 
-    <div style="display:flex;gap:12px;align-items:center">
-      <button class="badge" id="cartCountBadge" aria-hidden>0</button>
-      <button class="burger" aria-label="menu">☰</button>
+    <div class="nav-right">
+      <a class="btn btn-sm" href="#join">Join the project</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="leaf l1"></div>
-    <div class="leaf l2"></div>
-    <div class="leaf l3"></div>
-
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <h1 class="typing" id="typed">Fresh &amp; Premium Tea from Sreemangal</h1>
-        <p class="subtxt" id="subtxt">Hand-picked, 100% organic leaves — tradition in every cup.</p>
-        <a class="shop-btn" href="#shop" id="shopNow">Shop Now</a>
-      </div>
-
-      <aside class="hero-panel">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <div style="font-size:13px;color:rgba(11,61,22,0.6)">Small-batch</div>
-            <div style="font-weight:800">Sreemangal Select</div>
-          </div>
-          <div class="badge">Best Seller</div>
-        </div>
-        <img src="https://images.unsplash.com/photo-1509460913899-8a6f0f0b0fb8?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=7a1a8bd1f9e9a5f3b9f1d6a0be6d8a7d" alt="tea leaves"/>
-        <p style="font-size:14px;color:rgba(11,61,22,0.7)">Experience the delicate aroma &amp; bright cup of our signature blend.</p>
-      </aside>
-    </div>
-  </section>
-
-  <!-- Products Section -->
-  <section class="products" id="shop">
-    <div style="display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto">
-      <h2>Our Teas</h2>
-      <div style="color:rgba(11,61,22,0.6)">Showing <span id="visibleCount">16+</span> products</div>
-    </div>
-
-    <div class="filters" id="filterBar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="Green">Green Tea</button>
-      <button class="filter-btn" data-filter="Black">Black Tea</button>
-      <button class="filter-btn" data-filter="Premium">Premium</button>
-      <button class="filter-btn" data-filter="Herbal">Herbal</button>
-    </div>
-
-    <div class="product-grid" id="productGrid" aria-live="polite"></div>
-
-    <button class="load-more" id="loadMore">Load More</button>
-  </section>
-
-  <!-- Cart Toggle & Panel -->
-  <div class="cart-toggle" id="cartToggle" aria-label="Open cart">
-    <div style="font-weight:800">🫖</div>
-    <div class="count" id="cartCount">0</div>
   </div>
-  <aside class="cart-panel" id="cartPanel" aria-hidden="true">
-    <h3>Your Cart</h3>
-    <div id="cartItems"></div>
-    <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center">
-      <strong>Total:</strong><div id="cartTotal">৳0</div>
+  <div class="progress-track"><i id="progressBar"></i></div>
+</header>
+
+<!-- ================= MOBILE MENU ================= -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a href="#ego" data-close><span>01</span>EGO</a>
+  <a href="#players" data-close><span>02</span>PLAYERS</a>
+  <a href="#field" data-close><span>03</span>FIELD</a>
+  <a href="#choice" data-close><span>04</span>YOUR EGO</a>
+  <a href="#join" data-close><span>05</span>JOIN</a>
+  <div class="mm-foot">
+    <a class="btn" href="#join" data-close>Become a striker</a>
+  </div>
+</nav>
+
+<!-- ================= FIXED STAGE ================= -->
+<div class="stage" id="stage">
+  <div class="puzzle-layer" id="puzzleLayer" aria-hidden="true"></div>
+
+  <div class="hero" id="hero">
+    <div class="hero-kicker">Blue Lock Project &nbsp;//&nbsp; 300 Strikers</div>
+    <h1 class="hero-title">BLUE&nbsp;LOCK</h1>
+    <div class="hero-jp">ブルーロック</div>
+    <p class="hero-sub">Every piece creates the ego</p>
+    <div class="scroll-cue">
+      <span>Scroll to assemble</span>
+      <i></i>
     </div>
-    <button id="checkout" style="margin-top:12px;padding:12px;border-radius:10px;background:var(--lime-strong);border:none;font-weight:800;cursor:pointer">Checkout</button>
-  </aside>
+  </div>
 
-  <!-- About -->
-  <section class="split" id="about">
-    <div class="story">
-      <h2>About Baganer Cha</h2>
-      <p style="margin-top:12px;">Born in the lush hills of Sreemangal — our tea is grown in small family gardens, hand-picked and carefully processed to preserve nature's taste.</p>
-      <p style="margin-top:10px;color:rgba(11,61,22,0.7)">We are committed to ethical farming, fair pay, and the memory of every leaf.</p>
-    </div>
-    <div style="position:relative;overflow:hidden;border-radius:12px">
-      <img src="https://images.unsplash.com/photo-1447034356904-8d0b8f6bb3f0?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=b8b7a7b4d9c5e2f6a8c6c9d0d0f3c4b2" alt="tea garden" style="width:100%;height:360px;object-fit:cover;filter:brightness(.98)"/>
-    </div>
-  </section>
+  <div class="assembly-meter" id="assemblyMeter" aria-hidden="true">
+    <span>ASSEMBLY</span>
+    <div class="am-track"><div class="am-fill" id="amFill"></div></div>
+    <span><b id="amPct">0</b>%</span>
+  </div>
 
-  <!-- Why Choose Us -->
-  <section style="padding:36px 18px" id="why">
-    <h2 style="max-width:1200px;margin:0 auto 18px">Why Choose Us</h2>
-    <div class="icons-grid" style="max-width:1200px;margin:0 auto">
-      <div class="icon-card"> <h3>Pure &amp; Organic</h3><p style="margin-top:8px">No pesticides — just pure flavor.</p></div>
-      <div class="icon-card"> <h3>Small-batch</h3><p style="margin-top:8px">Careful processing for superior taste.</p></div>
-      <div class="icon-card"> <h3>Direct from Garden</h3><p style="margin-top:8px">Farm-to-cup freshness.</p></div>
-      <div class="icon-card"> <h3>Sustainable</h3><p style="margin-top:8px">Eco-conscious packaging &amp; practices.</p></div>
-    </div>
-  </section>
+  <div class="reveal" id="reveal">
+    <h2>Every piece <b>creates the ego</b></h2>
+    <div class="reveal-meta">300 strikers &nbsp;—&nbsp; one survivor</div>
+    <div class="reveal-rule"></div>
+  </div>
 
-  <!-- Testimonials -->
-  <section class="testimonials" id="testimonials">
-    <h2 style="text-align:center">What Customers Say</h2>
-    <div class="test-slider" style="margin-top:18px">
-      <div class="slides" id="slides">
-        <div class="slide">"Delicious aroma and clean finish — my daily cup." — Ayesha</div>
-        <div class="slide">"Fast delivery and lovely packaging." — Rahim</div>
-        <div class="slide">"Best green tea I've tried." — Sumi</div>
-      </div>
-    </div>
-  </section>
+  <div class="vignette" aria-hidden="true"></div>
+</div>
 
-  <!-- Blog -->
-  <section style="padding:36px 18px" id="blog">
-    <h2 style="max-width:1200px;margin:0 auto 12px">From our Blog</h2>
-    <div class="blog-grid" style="max-width:1200px;margin:0 auto">
-      <article style="background:white;padding:12px;border-radius:10px;box-shadow:var(--card-shadow)">
-        <h3>Tea Picking 101</h3><p style="margin-top:8px">How we harvest the tender leaves.</p>
-      </article>
-      <article style="background:white;padding:12px;border-radius:10px;box-shadow:var(--card-shadow)">
-        <h3>Brewing Guide</h3><p style="margin-top:8px">Brew the perfect cup every time.</p>
-      </article>
-      <article style="background:white;padding:12px;border-radius:10px;box-shadow:var(--card-shadow)">
-        <h3>Health Benefits</h3><p style="margin-top:8px">The goodness of tea in every sip.</p>
-      </article>
-    </div>
-  </section>
+<div class="spacer" id="spacer" aria-hidden="true"></div>
 
-  <!-- Gallery Masonry -->
-  <section style="padding:36px 18px">
-    <h2 style="max-width:1200px;margin:0 auto 12px">Gallery</h2>
-    <div class="masonry" style="max-width:1200px;margin:0 auto">
-      <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=19b8ae3b2b3f6e9c5" alt="garden1">
-      <img src="https://images.unsplash.com/photo-1508747703725-719300b3eff8?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=5a2b2a9c9d9c3a5f" alt="garden2">
-      <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9c1c9e9d8b2f3c4d" alt="garden3">
-      <img src="https://images.unsplash.com/photo-1494989940723-1a8b10f9b1d2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=2b1b2b3b4b5b6b7c" alt="garden4">
-    </div>
-  </section>
+<!-- ================= CONTENT ================= -->
+<main class="content" id="content">
 
-  <!-- Contact -->
-  <section class="contact" id="contact">
-    <h2>Contact Us</h2>
-    <form id="contactForm" onsubmit="return false;">
-      <input type="text" id="name" placeholder="Name" required style="padding:12px;border-radius:8px;border:1px solid rgba(11,61,22,0.06)" />
-      <input type="email" id="email" placeholder="Email" required style="padding:12px;border-radius:8px;border:1px solid rgba(11,61,22,0.06)" />
-      <input type="tel" id="bikash" placeholder="Bikash number" style="padding:12px;border-radius:8px;border:1px solid rgba(11,61,22,0.06)" />
-      <textarea id="message" placeholder="Message" rows="4" style="padding:12px;border-radius:8px;border:1px solid rgba(11,61,22,0.06)"></textarea>
-      <button style="padding:12px;border-radius:10px;background:var(--lime);border:none;font-weight:700;cursor:pointer">Send Message</button>
-    </form>
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
 
-    <div style="margin-top:18px">
-      <p><strong>Phone / WhatsApp:</strong> 01624066662</p>
-      <p><strong>Email:</strong> baganercha@gmail.com</p>
-      <p><strong>Facebook:</strong> <a href="https://facebook.com/baganercha" target="_blank" rel="noreferrer">facebook.com/baganercha</a></p>
-      <p><strong>Bikash:</strong> 01842995909</p>
-    </div>
-  </section>
-
-  <div class="toast" id="toast">Message sent</div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="cols">
-      <div style="flex:2">
-        <h3>Baganer Cha</h3>
-        <p style="max-width:340px">Premium tea from Sreemangal — small-batch, ethically grown.</p>
-      </div>
-      <div style="flex:1">
-        <h4>Quick Links</h4>
-        <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
-          <a href="#shop">Shop</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+  <!-- EGO -->
+  <section class="sec" id="ego">
+    <div class="wrap">
+      <div class="sec-label rv"><i>01</i> The philosophy</div>
+      <h2 class="display rv" style="--d:.06s">
+        Chaos is the <span class="accent">raw material.</span><br>
+        Ego is the <span class="pink">finished shape.</span>
+      </h2>
+      <div class="ego-grid">
+        <div class="rv" style="--d:.14s">
+          <p class="lede">
+            Three hundred strikers are locked inside a facility built to destroy everything except
+            the one thing that matters: <strong>the hunger to score</strong>. Every fragment of ability,
+            every shattered assumption, every rejected version of yourself — scattered across the dark.
+          </p>
+          <p class="lede" style="margin-top:18px;">
+            Scroll, and the pieces begin to fall into place. Not into a team. Into a
+            <strong>single, complete ego</strong> — the one who decides the game.
+          </p>
         </div>
-      </div>
-      <div style="flex:1">
-        <h4>Contact</h4>
-        <p>01624066662</p>
-        <p>baganercha@gmail.com</p>
-      </div>
-      <div style="flex:1">
-        <h4>Newsletter</h4>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <input id="nlemail" placeholder="Email" style="padding:8px;border-radius:8px;border:none;flex:1" />
-          <button id="nlbtn" style="padding:8px;border-radius:8px;background:var(--lime-strong);border:none;cursor:pointer">Go</button>
+        <div class="pillars">
+          <div class="pillar rv" style="--d:.1s">
+            <span class="p-index">01</span>
+            <h4>Isolate</h4>
+            <p>Strip away the team. Remove the comfort. What remains is the only thing worth building on.</p>
+          </div>
+          <div class="pillar rv" style="--d:.18s">
+            <span class="p-index">02</span>
+            <h4>Devour</h4>
+            <p>Every rival is a nutrient. Take their strengths, discard their weaknesses, and grow.</p>
+          </div>
+          <div class="pillar rv" style="--d:.26s">
+            <span class="p-index">03</span>
+            <h4>Decide</h4>
+            <p>In the final second, on the final touch, there is only one ego that gets to choose.</p>
+          </div>
         </div>
       </div>
     </div>
-    <div style="max-width:1200px;margin:18px auto 0;color:rgba(255,255,255,0.7);display:flex;justify-content:space-between;align-items:center">
-      <div>&copy; <span id="year"></span> Baganer Cha</div>
-      <div class="social"><a href="#">FB</a> <a href="#">IG</a></div>
+  </section>
+
+  <!-- PLAYERS -->
+  <section class="sec" id="players">
+    <div class="wrap">
+      <div class="sec-label rv"><i>02</i> The strikers</div>
+      <h2 class="display rv" style="--d:.06s">Meet the <span class="accent">egoists</span></h2>
+      <p class="lede rv" style="--d:.1s;max-width:56ch;">
+        Eight weapons. Eight ways to break a defence. Select a striker to inspect their ego profile.
+      </p>
+
+      <div class="player-layout">
+        <article class="p-card rv" id="pCard" style="--d:.14s">
+          <div class="p-card-bg" id="pCardBg"></div>
+          <div class="p-card-avatar" id="pCardAvatar">
+            <span class="kanji" id="pKanji">潔</span>
+            <span class="num" id="pNumBig">11</span>
+          </div>
+          <div class="p-card-body">
+            <span class="p-tag" id="pTag">METAVISION</span>
+            <h3 class="p-name" id="pName">Yoichi Isagi</h3>
+            <div class="p-jp" id="pJp">潔 世一</div>
+            <div class="p-role" id="pRole">Striker / Field Vision</div>
+            <p class="p-quote" id="pQuote">"I will be the one who decides the game."</p>
+            <div class="p-stats" id="pStats"></div>
+          </div>
+        </article>
+
+        <div class="player-list rv" style="--d:.2s">
+          <div class="p-nav-btns">
+            <button id="pPrev" aria-label="Previous striker">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button id="pNext" aria-label="Next striker">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div id="pList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELD -->
+  <section class="sec" id="field">
+    <div class="wrap">
+      <div class="sec-label rv"><i>03</i> The pitch</div>
+      <h2 class="display rv" style="--d:.06s">Control the <span class="accent">field</span></h2>
+      <p class="lede rv" style="--d:.1s;max-width:56ch;">
+        Switch formations and select any position. Every role is a different fragment of the same ego.
+      </p>
+
+      <div class="formation-tabs rv" id="formationTabs" style="--d:.14s;margin-top:26px;">
+        <button class="active" data-f="433">4-3-3</button>
+        <button data-f="4231">4-2-3-1</button>
+        <button data-f="352">3-5-2</button>
+      </div>
+
+      <div class="field-layout" style="margin-top:22px;">
+        <div class="pitch-frame rv" style="--d:.18s">
+          <div class="pitch" id="pitch">
+            <svg viewBox="0 0 300 400" aria-hidden="true">
+              <defs>
+                <linearGradient id="pitchGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0a1d42"/>
+                  <stop offset="0.5" stop-color="#071533"/>
+                  <stop offset="1" stop-color="#04102a"/>
+                </linearGradient>
+                <linearGradient id="glowLine" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="rgba(58,224,255,.15)"/>
+                  <stop offset="1" stop-color="rgba(58,224,255,.45)"/>
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="300" height="400" rx="12" fill="url(#pitchGrad)"/>
+              <g opacity=".55">
+                <rect x="0" y="0" width="300" height="50" fill="rgba(58,224,255,.035)"/>
+                <rect x="0" y="100" width="300" height="50" fill="rgba(58,224,255,.035)"/>
+                <rect x="0" y="200" width="300" height="50" fill="rgba(58,224,255,.035)"/>
+                <rect x="0" y="300" width="300" height="50" fill="rgba(58,224,255,.035)"/>
+              </g>
+              <rect x="14" y="14" width="272" height="372" fill="none" stroke="rgba(150,195,255,.34)" stroke-width="1.6" rx="4"/>
+              <line x1="14" y1="200" x2="286" y2="200" stroke="rgba(150,195,255,.34)" stroke-width="1.6"/>
+              <circle cx="150" cy="200" r="46" fill="none" stroke="rgba(150,195,255,.34)" stroke-width="1.6"/>
+              <circle cx="150" cy="200" r="3" fill="rgba(58,224,255,.7)"/>
+              <rect x="72" y="14" width="156" height="58" fill="none" stroke="rgba(150,195,255,.34)" stroke-width="1.6"/>
+              <rect x="112" y="14" width="76" height="24" fill="none" stroke="rgba(150,195,255,.34)" stroke-width="1.6"/>
+              <path d="M118,72 A38,38 0 0,0 182,72" fill="none" stroke="rgba(150,195,255,.28)" stroke-width="1.4"/>
+              <rect x="72" y="328" width="156" height="58" fill="none" stroke="rgba(150,195,255,.34)" stroke-width="1.6"/>
+              <rect x="112" y="362" width="76" height="24" fill="none" stroke="rgba(150,195,255,.34)" stroke-width="1.6"/>
+              <path d="M118,328 A38,38 0 0,1 182,328" fill="none" stroke="rgba(150,195,255,.28)" stroke-width="1.4"/>
+              <rect x="122" y="7" width="56" height="7" rx="2" fill="rgba(58,224,255,.16)" stroke="rgba(58,224,255,.55)" stroke-width="1.3"/>
+              <rect x="122" y="386" width="56" height="7" rx="2" fill="rgba(58,224,255,.16)" stroke="rgba(58,224,255,.55)" stroke-width="1.3"/>
+            </svg>
+          </div>
+        </div>
+
+        <aside class="field-side">
+          <div class="finfo rv" id="finfo" style="--d:.22s">
+            <div class="fi-num" id="fiNum">11</div>
+            <h3 id="fiName">Yoichi Isagi</h3>
+            <div class="fi-jp" id="fiJp">潔 世一</div>
+            <span class="fi-role" id="fiRole">Striker</span>
+            <p id="fiDesc"></p>
+            <div class="fi-bars" id="fiBars"></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="sec" id="choice">
+    <div class="wrap">
+      <div class="sec-label rv"><i>04</i> The diagnostic</div>
+      <h2 class="display rv" style="--d:.06s">Which <span class="accent">ego</span> is yours?</h2>
+
+      <div class="quiz-shell rv" id="quizShell" style="--d:.12s">
+        <div id="quizStage">
+          <div class="quiz-head">
+            <div class="quiz-step">Question <b id="qNow">1</b> / <span id="qTotal">4</span></div>
+            <div class="quiz-dots" id="quizDots"></div>
+          </div>
+          <div class="quiz-q" id="quizQ">Loading…</div>
+          <div class="quiz-options" id="quizOptions"></div>
+        </div>
+
+        <div class="quiz-result" id="quizResult">
+          <div class="result-badge" id="resBadge">潔</div>
+          <div class="result-body">
+            <div class="rb-type" id="resType">TYPE 01</div>
+            <h3 id="resName">The Striker</h3>
+            <p id="resDesc"></p>
+            <div class="fi-bars" id="resBars" style="margin-bottom:22px;"></div>
+            <div class="result-actions">
+              <button class="btn" id="resRestart">Run it again</button>
+              <a class="btn btn-ghost" href="#join">Enter the project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sec cta" id="join">
+    <div class="wrap">
+      <div class="sec-label rv" style="justify-content:center;display:flex;"><i>05</i> The final piece</div>
+      <h2 class="display rv" style="--d:.06s">
+        Become the one who<br><span class="accent">decides the game.</span>
+      </h2>
+      <p class="lede rv" style="--d:.12s;margin:0 auto;text-align:center;">
+        The pieces are already in motion. All that is left is the ego that puts them together.
+      </p>
+      <div class="cta-actions rv" style="--d:.18s">
+        <a class="btn" href="#top">Replay the assembly</a>
+        <a class="btn btn-ghost" href="#players">Review the strikers</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="f-brand">
+        <a class="brand" href="#top">
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,2.5 35,11 35,29 20,37.5 5,29 5,11" fill="none" stroke="url(#bgA)" stroke-width="1.8"/>
+            <polygon points="20,11 28.5,16 28.5,24.5 20,29.5 11.5,24.5 11.5,16" fill="url(#bgA)" opacity=".92"/>
+            <polygon points="20,15.5 24.8,18.3 24.8,23.2 20,26 15.2,23.2 15.2,18.3" fill="#03050c" opacity=".75"/>
+          </svg>
+          <span class="brand-text">
+            <strong>BLUE LOCK</strong>
+            <em>ブルーロック</em>
+          </span>
+        </a>
+        <p>An interactive concept experience built on the idea that every scattered piece is a fragment of one ego.</p>
+      </div>
+      <div>
+        <h5>Experience</h5>
+        <ul>
+          <li><a href="#ego">Philosophy</a></li>
+          <li><a href="#players">Strikers</a></li>
+          <li><a href="#field">The Pitch</a></li>
+          <li><a href="#choice">Diagnostic</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="#join">Join</a></li>
+          <li><a href="#top">Facility</a></li>
+          <li><a href="#players">Scouting</a></li>
+          <li><a href="#field">Tactics</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Signal</h5>
+        <ul>
+          <li><a href="#top">Instagram</a></li>
+          <li><a href="#top">X / Twitter</a></li>
+          <li><a href="#top">YouTube</a></li>
+          <li><a href="#top">Discord</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>© 2025 Blue Lock Project — concept experience</span>
+      <span>Every piece creates the ego.</span>
     </div>
   </footer>
 
-  <script>
-    /* ==========================
-       PRODUCTS (min 16) - data-driven
-       Edit / extend these entries
-       ========================== */
-    const PRODUCTS = [
-      {id:1,title:'Sreemangal Classic Green',type:'Green',price:220,img:'https://images.unsplash.com/photo-1509460913899-8a6f0f0b0fb8?q=80&w=800&auto=format&fit=crop'},
-      {id:2,title:'Mild Breakfast Black',type:'Black',price:180,img:'https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?q=80&w=800&auto=format&fit=crop'},
-      {id:3,title:'Premium Golden Blend',type:'Premium',price:520,img:'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=800&auto=format&fit=crop'},
-      {id:4,title:'Chamomile Herbal',type:'Herbal',price:300,img:'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?q=80&w=800&auto=format&fit=crop'},
-      {id:5,title:'Jasmine Green',type:'Green',price:260,img:'https://images.unsplash.com/photo-1505576773344-03d5a6ffd9c6?q=80&w=800&auto=format&fit=crop'},
-      {id:6,title:'Assam Strong Black',type:'Black',price:200,img:'https://images.unsplash.com/photo-1497042151330-7a3ce2f7e9d9?q=80&w=800&auto=format&fit=crop'},
-      {id:7,title:'Silver Tips Premium',type:'Premium',price:760,img:'https://images.unsplash.com/photo-1511459761839-6586e86a3f4a?q=80&w=800&auto=format&fit=crop'},
-      {id:8,title:'Lemongrass Herbal',type:'Herbal',price:240,img:'https://images.unsplash.com/photo-1541592106381-8e70f4b3a9f0?q=80&w=800&auto=format&fit=crop'},
-      {id:9,title:'Mint Green',type:'Green',price:210,img:'https://images.unsplash.com/photo-1505575398956-a9bbf6e9a4d5?q=80&w=800&auto=format&fit=crop'},
-      {id:10,title:'Darjeeling Black',type:'Black',price:340,img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop'},
-      {id:11,title:'Organic Blend',type:'Premium',price:420,img:'https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=800&auto=format&fit=crop'},
-      {id:12,title:'Ginger Herbal',type:'Herbal',price:230,img:'https://images.unsplash.com/photo-1543778782-5dbe4f7b6b58?q=80&w=800&auto=format&fit=crop'},
-      {id:13,title:'Forest Green',type:'Green',price:250,img:'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=800&auto=format&fit=crop'},
-      {id:14,title:'Masala Black',type:'Black',price:210,img:'https://images.unsplash.com/photo-1512295767273-ac3a8b1b0b45?q=80&w=800&auto=format&fit=crop'},
-      {id:15,title:'Reserve Estate',type:'Premium',price:980,img:'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=800&auto=format&fit=crop'},
-      {id:16,title:'Tulsi Herbal',type:'Herbal',price:260,img:'https://images.unsplash.com/photo-1543248939-9b6b1b4e1a4f?q=80&w=800&auto=format&fit=crop'}
-    ];
+</main>
 
-    /* ==========================
-       Small helpers & DOM refs
-       ========================== */
-    const productGrid = document.getElementById('productGrid');
-    const filterBar = document.getElementById('filterBar');
-    const loadMoreBtn = document.getElementById('loadMore');
-    const cartToggle = document.getElementById('cartToggle');
-    const cartPanel = document.getElementById('cartPanel');
-    const cartCountEl = document.getElementById('cartCount');
-    const cartItemsEl = document.getElementById('cartItems');
-    const cartTotalEl = document.getElementById('cartTotal');
-    const cartCountBadge = document.getElementById('cartCountBadge');
-    const visibleCountEl = document.getElementById('visibleCount');
+<script>
+/* ============================================================
+   0. UTILITIES
+   ============================================================ */
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const clamp01 = v => clamp(v, 0, 1);
+const lerp = (a, b, t) => a + (b - a) * t;
+const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+const easeInOutCubic = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const rand = (a, b) => a + Math.random() * (b - a);
 
-    let visibleLimit = 8; // initial
-    let currentFilter = 'all';
+/* ============================================================
+   1. GLOBAL STATE
+   ============================================================ */
+const IMG_URL = 'https://www.designarena.ai/u/4048f958-e5eb-4481-932e-0e62856d6176';
+const IMG_W = 1920, IMG_H = 1080;
+let imgSrc = IMG_URL;
 
-    // Cart in localStorage
-    const CART_KEY = 'baganer_cart_v1';
-    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}');
+const state = {
+  vw: window.innerWidth,
+  vh: window.innerHeight,
+  scrollY: window.scrollY,
+  vel: 0,
+  lastY: window.scrollY,
+  p: 0,                 // assembly progress 0..1
+  stageOff: false,
+  cols: 16,
+  rows: 9,
+  isMobile: false
+};
 
-    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
-    function getCartCount(){ return Object.values(cart).reduce((s,i)=>s+i.qty,0); }
-    function getCartTotal(){ return Object.values(cart).reduce((s,i)=>s + i.qty * i.price,0); }
+const stage = document.getElementById('stage');
+const puzzleLayer = document.getElementById('puzzleLayer');
+const hero = document.getElementById('hero');
+const reveal = document.getElementById('reveal');
+const spacer = document.getElementById('spacer');
+const meter = document.getElementById('assemblyMeter');
+const amFill = document.getElementById('amFill');
+const amPct = document.getElementById('amPct');
+const progressBar = document.getElementById('progressBar');
+const nav = document.getElementById('nav');
 
-    /* ==========================
-       Render products
-       ========================== */
-    function renderProducts(){
-      productGrid.innerHTML = '';
-      const filtered = PRODUCTS.filter(p => currentFilter==='all' ? true : p.type === currentFilter);
-      visibleCountEl.textContent = filtered.length >= visibleLimit ? visibleLimit + '+' : filtered.length;
-      const toShow = filtered.slice(0, visibleLimit);
-      toShow.forEach(p => {
-        const card = document.createElement('article');card.className='card';
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.title}"/>
-          <div style="margin-top:8px"><strong>${p.title}</strong><div class="price">৳ ${p.price}</div></div>
-          <button class="add-btn">Add</button>
-        `;
-        const btn = card.querySelector('.add-btn');
-        btn.addEventListener('click', ()=> addToCart(p));
-        productGrid.appendChild(card);
-      });
-      // Reveal animation via IntersectionObserver
-      revealOnScroll();
+let pieces = [];
+let timeline = { aStart: 0, aEnd: 0, rIn: 0, rFull: 0, holdEnd: 0, spacerH: 0 };
+
+/* ============================================================
+   2. FALLBACK IMAGE (stadium scene, drawn on canvas)
+   ============================================================ */
+function makeFallbackImage(){
+  const W = 1920, H = 1080;
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const x = c.getContext('2d');
+
+  // night sky
+  let g = x.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#01030a');
+  g.addColorStop(.38, '#061534');
+  g.addColorStop(.62, '#0a2char'.replace('char','450'));
+  g.addColorStop(1, '#04102a');
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+
+  // floodlight beams
+  for (let i = 0; i < 4; i++){
+    const fx = 190 + i * 545;
+    const rg = x.createRadialGradient(fx, 90, 0, fx, 90, 760);
+    rg.addColorStop(0, 'rgba(150,215,255,.55)');
+    rg.addColorStop(.35, 'rgba(60,140,255,.16)');
+    rg.addColorStop(1, 'rgba(60,140,255,0)');
+    x.fillStyle = rg;
+    x.beginPath(); x.arc(fx, 90, 760, 0, Math.PI * 2); x.fill();
+    // lamp
+    x.fillStyle = 'rgba(220,245,255,.95)';
+    x.fillRect(fx - 26, 52, 52, 16);
+  }
+
+  // crowd
+  for (let i = 0; i < 3400; i++){
+    const cy = 330 + Math.random() * 190;
+    const a = .05 + Math.random() * .28;
+    x.fillStyle = `rgba(${70 + Math.random() * 130 | 0},${140 + Math.random() * 100 | 0},255,${a})`;
+    x.fillRect(Math.random() * W, cy, 3, 3);
+  }
+
+  // pitch (trapezoid)
+  g = x.createLinearGradient(0, 520, 0, H);
+  g.addColorStop(0, '#0f3a22');
+  g.addColorStop(1, '#04130c');
+  x.fillStyle = g;
+  x.beginPath();
+  x.moveTo(-260, H); x.lineTo(W + 260, H);
+  x.lineTo(W * .74, 512); x.lineTo(W * .26, 512);
+  x.closePath(); x.fill();
+
+  // stripes
+  x.save();
+  x.beginPath();
+  x.moveTo(-260, H); x.lineTo(W + 260, H);
+  x.lineTo(W * .74, 512); x.lineTo(W * .26, 512);
+  x.closePath(); x.clip();
+  for (let i = 0; i < 16; i++){
+    const t0 = i / 16, t1 = (i + 1) / 16;
+    x.fillStyle = i % 2 ? 'rgba(255,255,255,.022)' : 'rgba(0,0,0,.07)';
+    const yA = 512 + (H - 512) * t0, yB = 512 + (H - 512) * t1;
+    const wA = (W * .48) + (W * 1.02) * t0, wB = (W * .48) + (W * 1.02) * t1;
+    x.beginPath();
+    x.moveTo(W / 2 - wA / 2, yA); x.lineTo(W / 2 + wA / 2, yA);
+    x.lineTo(W / 2 + wB / 2, yB); x.lineTo(W / 2 - wB / 2, yB);
+    x.closePath(); x.fill();
+  }
+  x.restore();
+
+  // glowing centre circle
+  x.strokeStyle = 'rgba(160,215,255,.5)';
+  x.lineWidth = 6;
+  x.beginPath();
+  x.ellipse(W / 2, 800, 300, 105, 0, 0, Math.PI * 2);
+  x.stroke();
+
+  // title
+  x.textAlign = 'center';
+  x.font = '400 210px Anton, Impact, sans-serif';
+  x.shadowColor = 'rgba(56,140,255,.9)';
+  x.shadowBlur = 90;
+  x.fillStyle = '#ffffff';
+  x.fillText('BLUE LOCK', W / 2, 400);
+  x.shadowBlur = 0;
+
+  try { return c.toDataURL('image/jpeg', .92); }
+  catch (e){ return null; }
+}
+
+/* ============================================================
+   3. PUZZLE BUILD
+   ============================================================ */
+function buildPuzzle(){
+  const vw = state.vw, vh = state.vh;
+  const isMobile = vw < 760;
+  state.isMobile = isMobile;
+
+  const COLS = isMobile ? 9 : 16;
+  const ROWS = isMobile ? 6 : 9;
+  state.cols = COLS; state.rows = ROWS;
+
+  // fit the assembled image inside the viewport
+  const fitW = (vw * 0.94) / IMG_W;
+  const fitH = (vh * (isMobile ? 0.58 : 0.74)) / IMG_H;
+  const fit = Math.min(fitW, fitH);
+
+  let pw = Math.max(6, Math.floor((IMG_W * fit) / COLS));
+  let ph = Math.max(6, Math.floor((IMG_H * fit) / ROWS));
+
+  const targetW = pw * COLS;
+  const targetH = ph * ROWS;
+  const ox = Math.round((vw - targetW) / 2);
+  const oy = Math.round((vh - targetH) / 2);
+
+  // clear
+  puzzleLayer.innerHTML = '';
+  pieces = [];
+
+  const spreadX = vw * 0.82;
+  const spreadY = vh * 0.74;
+  const cx = (COLS - 1) / 2;
+  const cy = (ROWS - 1) / 2;
+  const maxDist = Math.hypot(cx, cy) || 1;
+
+  const frag = document.createDocumentFragment();
+
+  for (let r = 0; r < ROWS; r++){
+    for (let c = 0; c < COLS; c++){
+      const el = document.createElement('div');
+      el.className = 'pz';
+      el.style.width = pw + 'px';
+      el.style.height = ph + 'px';
+      el.style.backgroundImage = `url("${imgSrc}")`;
+      el.style.backgroundSize = `${targetW}px ${targetH}px`;
+      el.style.backgroundPosition = `${-c * pw}px ${-r * ph}px`;
+
+      const distNorm = Math.hypot(c - cx, r - cy) / maxDist;
+
+      const ang = Math.random() * Math.PI * 2;
+      const rad = Math.sqrt(Math.random());
+
+      const pc = {
+        el,
+        fx: ox + c * pw,
+        fy: oy + r * ph,
+        // scatter offset
+        sx: Math.cos(ang) * rad * spreadX,
+        sy: Math.sin(ang) * rad * spreadY,
+        // rotation
+        rx: rand(-95, 95),
+        ry: rand(-125, 125),
+        rz: rand(-70, 70),
+        // scale / depth
+        sc: rand(.5, 1.32),
+        z: rand(-480, 480),
+        // opacity when scattered
+        op0: rand(.14, .62),
+        // motion
+        delay: clamp01(distNorm * 0.44 + Math.random() * 0.07),
+        dur: rand(.3, .44),
+        drift: rand(5, 24),
+        sp: rand(.3, .85),
+        phz: Math.random() * Math.PI * 2,
+        depth: rand(.35, 1.25),
+        // cached transform (to detect changes)
+        _t: '', _o: -1
+      };
+
+      pc.dur = Math.min(pc.dur, 1 - pc.delay - 0.01);
+      if (pc.dur < 0.12) pc.dur = 0.12;
+
+      pieces.push(pc);
+      frag.appendChild(el);
     }
+  }
+  puzzleLayer.appendChild(frag);
+}
 
-    /* Filter controls */
-    filterBar.addEventListener('click', (e)=>{
-      const b = e.target.closest('.filter-btn'); if(!b) return;
-      filterBar.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-      currentFilter = b.dataset.filter;
-      visibleLimit = 8; // reset
-      renderProducts();
+/* ============================================================
+   4. LAYOUT / TIMELINE
+   ============================================================ */
+function layout(){
+  state.vw = window.innerWidth;
+  state.vh = window.innerHeight;
+  const vh = state.vh;
+
+  timeline = {
+    aStart: vh * 0.32,
+    aEnd: vh * 2.55,
+    rIn: vh * 2.5,
+    rFull: vh * 2.95,
+    holdEnd: vh * 3.85,
+    spacerH: vh * 4.25
+  };
+  spacer.style.height = timeline.spacerH + 'px';
+
+  const gridChanged = (state.vw < 760 ? 9 : 16) !== state.cols ||
+                      (state.vw < 760 ? 6 : 9) !== state.rows;
+  buildPuzzle();
+  updatePieces(performance.now() / 1000, 0, 0);
+  void gridChanged;
+}
+
+/* ============================================================
+   5. PIECE UPDATE
+   ============================================================ */
+let assembledFlag = false;
+
+function updatePieces(time, p, vnorm){
+  const inv = 1 - p;
+  const floatScale = inv;
+
+  for (let i = 0; i < pieces.length; i++){
+    const pc = pieces[i];
+    const raw = (p - pc.delay) / pc.dur;
+    const t = clamp01(raw);
+    const e = easeOutCubic(t);
+    const k = 1 - e;
+
+    // ambient float, only while scattered
+    const amp = pc.drift * k * floatScale;
+    const dxd = Math.sin(time * pc.sp + pc.phz) * amp;
+    const dyd = Math.cos(time * pc.sp * 0.83 + pc.phz * 1.7) * amp;
+
+    // downward drift as the user scrolls + velocity influence
+    const down = p * 250 * k;
+    const vOffX = vnorm * pc.depth * 46 * k;
+    const vOffY = -vnorm * pc.depth * 34 * k;
+
+    const x = pc.fx + pc.sx * k + dxd + vOffX;
+    const y = pc.fy + pc.sy * k + dyd + down + vOffY;
+
+    const rx = pc.rx * k + vnorm * 7 * k;
+    const ry = pc.ry * k - vnorm * 9 * k;
+    const rz = pc.rz * k * .55;
+    const sc = 1 + (pc.sc - 1) * k;
+    const z = pc.z * k;
+    const op = pc.op0 + (1 - pc.op0) * e;
+
+    const tStr = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,${z.toFixed(0)}px) rotateX(${rx.toFixed(1)}deg) rotateY(${ry.toFixed(1)}deg) rotateZ(${rz.toFixed(1)}deg) scale(${sc.toFixed(3)})`;
+    const oStr = Math.round(op * 100);
+
+    if (pc._t !== tStr){ pc.el.style.transform = tStr; pc._t = tStr; }
+    if (pc._o !== oStr){ pc.el.style.opacity = oStr / 100; pc._o = oStr; }
+  }
+
+  const nowAssembled = p > 0.995;
+  if (nowAssembled !== assembledFlag){
+    assembledFlag = nowAssembled;
+    stage.classList.toggle('assembled', nowAssembled);
+  }
+}
+
+/* ============================================================
+   6. DUST PARTICLES
+   ============================================================ */
+const dustCanvas = document.getElementById('dust');
+const dctx = dustCanvas.getContext('2d');
+let dust = [];
+let dustSprite = null;
+let dpr = 1;
+
+function makeSprite(){
+  const c = document.createElement('canvas');
+  c.width = c.height = 64;
+  const g = c.getContext('2d');
+  const rg = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  rg.addColorStop(0, 'rgba(190,235,255,1)');
+  rg.addColorStop(.28, 'rgba(90,175,255,.55)');
+  rg.addColorStop(.6, 'rgba(30,90,220,.18)');
+  rg.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = rg; g.fillRect(0, 0, 64, 64);
+  return c;
+}
+
+function initDust(){
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  dustCanvas.width = state.vw * dpr;
+  dustCanvas.height = state.vh * dpr;
+  dctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const count = state.vw < 760 ? 46 : 96;
+  dust = [];
+  for (let i = 0; i < count; i++){
+    dust.push({
+      x: Math.random() * state.vw,
+      y: Math.random() * state.vh,
+      r: rand(1.2, 7),
+      vx: rand(-.14, .14),
+      vy: rand(-.3, -.04),
+      a: rand(.12, .6),
+      p: Math.random() * Math.PI * 2,
+      s: rand(.4, 1.4)
     });
+  }
+}
 
-    loadMoreBtn.addEventListener('click', ()=>{
-      visibleLimit += 8; renderProducts();
-    });
+function drawDust(time){
+  dctx.clearRect(0, 0, state.vw, state.vh);
+  for (let i = 0; i < dust.length; i++){
+    const d = dust[i];
+    d.x += d.vx + Math.sin(time * d.s + d.p) * .12;
+    d.y += d.vy;
+    if (d.y < -30){ d.y = state.vh + 30; d.x = Math.random() * state.vw; }
+    if (d.x < -30) d.x = state.vw + 30;
+    if (d.x > state.vw + 30) d.x = -30;
 
-    /* ==========================
-       Cart functions
-       ========================== */
-    function addToCart(p){
-      if(!cart[p.id]) cart[p.id] = {...p, qty:0};
-      cart[p.id].qty += 1;
-      saveCart();
-      updateCartUI();
-      cartToggle.classList.add('bounce'); setTimeout(()=>cartToggle.classList.remove('bounce'),800);
+    const pulse = .65 + Math.sin(time * d.s * 1.6 + d.p) * .35;
+    dctx.globalAlpha = d.a * pulse;
+    const size = d.r * 8;
+    dctx.drawImage(dustSprite, d.x - size / 2, d.y - size / 2, size, size);
+  }
+  dctx.globalAlpha = 1;
+}
+
+/* ============================================================
+   7. MAIN LOOP
+   ============================================================ */
+let running = true;
+
+function tick(now){
+  const t = now / 1000;
+  const y = window.scrollY;
+  const dy = y - state.lastY;
+  state.lastY = y;
+  state.scrollY = y;
+
+  // smoothed velocity (px per frame)
+  state.vel = lerp(state.vel, dy, 0.18);
+  const vnorm = clamp(state.vel / 26, -2.4, 2.4);
+
+  // assembly progress
+  const p = clamp01((y - timeline.aStart) / (timeline.aEnd - timeline.aStart));
+  state.p = p;
+
+  // -------- stage visibility
+  const off = y > timeline.holdEnd + state.vh * 0.9;
+  if (off !== state.stageOff){
+    state.stageOff = off;
+    stage.classList.toggle('hidden', off);
+  }
+
+  if (!off){
+    // puzzle
+    updatePieces(t, p, vnorm);
+
+    // layer rotation from velocity for 3D feel
+    const rot = -vnorm * 1.15;
+    puzzleLayer.style.transform = `rotateY(${rot.toFixed(2)}deg) rotateX(${(vnorm * 0.5).toFixed(2)}deg)`;
+
+    // hero fade
+    const hOut = clamp01(y / (state.vh * 0.5));
+    hero.style.opacity = (1 - hOut).toFixed(3);
+    hero.style.transform = `translate3d(0,${(-y * 0.18).toFixed(1)}px,0) scale(${(1 + hOut * 0.07).toFixed(3)})`;
+    hero.style.visibility = hOut >= 1 ? 'hidden' : 'visible';
+
+    // reveal overlay
+    let rT = clamp01((y - timeline.rIn) / (timeline.rFull - timeline.rIn));
+    rT *= 1 - clamp01((y - timeline.holdEnd) / (state.vh * 0.5));
+    reveal.style.opacity = rT.toFixed(3);
+    reveal.style.transform = `translate3d(0,${((1 - rT) * 34).toFixed(1)}px,0)`;
+    reveal.classList.toggle('on', rT > 0.35);
+
+    // assembly meter
+    const showMeter = y > timeline.aStart * 0.6 && y < timeline.holdEnd;
+    meter.classList.toggle('on', showMeter);
+    if (showMeter){
+      amFill.style.height = (p * 100).toFixed(1) + '%';
+      amPct.textContent = Math.round(p * 100);
     }
+  }
 
-    function removeFromCart(id){ delete cart[id]; saveCart(); updateCartUI(); }
-    function changeQty(id,delta){ if(cart[id]){ cart[id].qty = Math.max(0,cart[id].qty + delta); if(cart[id].qty===0) delete cart[id]; saveCart(); updateCartUI(); }}
+  drawDust(t);
 
-    function updateCartUI(){
-      const count = getCartCount();
-      cartCountEl.textContent = count; cartCountBadge.textContent = count;
-      cartItemsEl.innerHTML = '';
-      Object.values(cart).forEach(i=>{
-        const el = document.createElement('div');el.className='cart-item';
-        el.innerHTML = `
-          <img src="${i.img}" style="width:64px;height:64px;object-fit:cover;border-radius:8px" />
-          <div style="flex:1">
-            <div style="font-weight:700">${i.title}</div>
-            <div style="color:rgba(11,61,22,0.6)">৳ ${i.price} x ${i.qty}</div>
-            <div style="margin-top:8px"><button onclick="changeQty(${i.id},-1)">-</button> <button onclick="changeQty(${i.id},1)">+</button> <button onclick="removeFromCart(${i.id})">Remove</button></div>
-          </div>
-        `;
-        cartItemsEl.appendChild(el);
-      });
-      cartTotalEl.textContent = '৳ ' + getCartTotal();
+  // page progress
+  const docH = document.documentElement.scrollHeight - state.vh;
+  progressBar.style.width = (docH > 0 ? clamp01(y / docH) * 100 : 0) + '%';
+
+  // nav solid
+  nav.classList.toggle('solid', y > 24);
+
+  running = true;
+  requestAnimationFrame(tick);
+}
+
+/* ============================================================
+   8. NAV / MOBILE MENU
+   ============================================================ */
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function setMenu(open){
+  burger.classList.toggle('open', open);
+  mobileMenu.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+burger.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
+mobileMenu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+/* active nav link */
+const sections = ['ego', 'players', 'field', 'choice'].map(id => document.getElementById(id));
+const navAnchors = Array.from(document.querySelectorAll('[data-nav]'));
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting){
+      navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
     }
+  });
+}, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+sections.forEach(s => s && navObserver.observe(s));
 
-    // Expose some helpers globally for inline button handlers
-    window.changeQty = changeQty; window.removeFromCart = removeFromCart;
-
-    cartToggle.addEventListener('click', ()=>{
-      cartPanel.classList.toggle('open');
-      cartPanel.setAttribute('aria-hidden', !cartPanel.classList.contains('open'));
-    });
-
-    /* ==========================
-       Intersection reveal animations
-       ========================== */
-    function revealOnScroll(){
-      const obs = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); obs.unobserve(en.target)} });
-      },{threshold:0.12});
-      document.querySelectorAll('.card').forEach(c=>obs.observe(c));
-      document.querySelectorAll('.icon-card').forEach(c=>obs.observe(c));
+/* ============================================================
+   9. SCROLL REVEALS
+   ============================================================ */
+const rvObserver = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting){
+      en.target.classList.add('in');
+      rvObserver.unobserve(en.target);
     }
+  });
+}, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+document.querySelectorAll('.rv').forEach(el => rvObserver.observe(el));
 
-    /* ==========================
-       Simple typed effect (hero)
-       ========================== */
-    (function typeHero(){
-      const el = document.getElementById('typed');
-      const text = el.textContent; el.textContent = '';
-      let i=0; function step(){ if(i<=text.length){ el.textContent = text.slice(0,i); i++; setTimeout(step, 30); } }
-      step();
-    })();
+/* marquee content */
+(function buildMarquee(){
+  const items = ['Egoist', 'Striker', '潔', 'Devour', 'Metavision', '蜂楽', 'Destroyer', 'Blue Lock', '凛', 'Instinct'];
+  const track = document.getElementById('marqueeTrack');
+  let html = '';
+  for (let pass = 0; pass < 2; pass++){
+    items.forEach(it => { html += `<span>${pass === 1 ? `<em>${it}</em>` : it}</span>`; });
+  }
+  track.innerHTML = html;
+})();
 
-    /* ==========================
-       Testimonials slider (auto)
-       ========================== */
-    (function slider(){
-      const slides = document.getElementById('slides'); let idx=0; setInterval(()=>{ idx = (idx+1) % slides.children.length; slides.style.transform = `translateX(-${idx*100}%)`; },4000);
-    })();
+/* ============================================================
+   10. PLAYERS
+   ============================================================ */
+const PLAYERS = [
+  {
+    id: 'isagi', name: 'Yoichi Isagi', jp: '潔 世一', kanji: '潔', num: '11',
+    role: 'Striker / Field Vision', tag: 'METAVISION',
+    quote: '"I will be the one who decides the game."',
+    c1: '#1b4dff', c2: '#3ae0ff',
+    stats: [['Vision', 96], ['Willpower', 92], ['Link-up', 88], ['Direct Shot', 90]]
+  },
+  {
+    id: 'bachira', name: 'Meguru Bachira', jp: '蜂楽 廻', kanji: '蜂', num: '8',
+    role: 'Winger / Dribbler', tag: 'MONSTER INSTINCT',
+    quote: '"The monster inside me wants to play."',
+    c1: '#ffd23d', c2: '#ff7a2f',
+    stats: [['Dribbling', 98], ['Improvisation', 95], ['Acceleration', 88], ['Finishing', 82]]
+  },
+  {
+    id: 'rin', name: 'Rin Itoshi', jp: '糸師 凛', kanji: '凛', num: '10',
+    role: 'Playmaker / Destroyer', tag: 'PERFECT SENSOR',
+    quote: '"I will crush everyone on this field."',
+    c1: '#00d8ff', c2: '#1150ff',
+    stats: [['Technique', 99], ['Shooting', 97], ['Composure', 94], ['Tactics', 95]]
+  },
+  {
+    id: 'nagi', name: 'Seishiro Nagi', jp: '凪 誠士郎', kanji: '凪', num: '7',
+    role: 'Forward / Trapper', tag: 'GENIUS TOUCH',
+    quote: '"Everything is a hassle... except that goal."',
+    c1: '#dfe7ff', c2: '#7f9cff',
+    stats: [['Ball Control', 99], ['Volley', 94], ['Athleticism', 80], ['Awakening', 76]]
+  },
+  {
+    id: 'chigiri', name: 'Hyoma Chigiri', jp: '千切 豹馬', kanji: '切', num: '6',
+    role: 'Full-back / Sprinter', tag: 'RED PANTHER',
+    quote: '"I will run until the very end."',
+    c1: '#ff2e83', c2: '#ff6b3d',
+    stats: [['Top Speed', 99], ['Acceleration', 98], ['Dribble', 88], ['Stamina', 84]]
+  },
+  {
+    id: 'kunigami', name: 'Rensuke Kunigami', jp: '國神 錬介', kanji: '國', num: '9',
+    role: 'Target Man', tag: 'LEFT FOOT CANNON',
+    quote: '"A hero settles the game with his own hands."',
+    c1: '#ff7a2f', c2: '#ffc73d',
+    stats: [['Power', 95], ['Aerial', 93], ['Left Shot', 96], ['Resilience', 88]]
+  },
+  {
+    id: 'barou', name: 'Shouei Barou', jp: '馬狼 照英', kanji: '馬', num: '5',
+    role: 'Striker / King', tag: 'ABSOLUTE KING',
+    quote: '"The field is my throne."',
+    c1: '#b13dff', c2: '#5a1bff',
+    stats: [['Physical', 97], ['Shooting', 94], ['Ego', 99], ['Pressure', 90]]
+  },
+  {
+    id: 'reo', name: 'Reo Mikage', jp: '御影 玲王', kanji: '御', num: '4',
+    role: 'All-rounder / Catalyst', tag: 'COPY CATALYST',
+    quote: '"I can do anything I set my mind to."',
+    c1: '#7c5cff', c2: '#3ae0ff',
+    stats: [['Versatility', 95], ['Copying', 92], ['Playmaking', 90], ['Stamina', 89]]
+  }
+];
 
-    /* ==========================
-       Form submission + toast
-       ========================== */
-    document.getElementById('contactForm').addEventListener('submit', ()=>{});
-    document.querySelector('#contactForm button').addEventListener('click', ()=>{
-      const toast = document.getElementById('toast'); toast.style.display='block'; toast.textContent='Message sent — we will contact you soon.';
-      setTimeout(()=>toast.style.display='none',3000);
-      document.getElementById('contactForm').reset();
+let currentPlayer = 0;
+
+const pCard = document.getElementById('pCard');
+const pCardBg = document.getElementById('pCardBg');
+const pKanji = document.getElementById('pKanji');
+const pNumBig = document.getElementById('pNumBig');
+const pTag = document.getElementById('pTag');
+const pName = document.getElementById('pName');
+const pJp = document.getElementById('pJp');
+const pRole = document.getElementById('pRole');
+const pQuote = document.getElementById('pQuote');
+const pStats = document.getElementById('pStats');
+const pList = document.getElementById('pList');
+
+function renderPlayerList(){
+  pList.innerHTML = PLAYERS.map((pl, i) => `
+    <button class="p-item${i === currentPlayer ? ' active' : ''}" data-i="${i}"
+      style="--c1:${pl.c1};--c2:${pl.c2}">
+      <span class="pi-num">${pl.num}</span>
+      <span>
+        <span class="pi-name">${pl.name}</span><br>
+        <span class="pi-role">${pl.role}</span>
+      </span>
+      <span class="pi-kanji">${pl.kanji}</span>
+    </button>
+  `).join('');
+  pList.querySelectorAll('.p-item').forEach(btn => {
+    btn.addEventListener('click', () => selectPlayer(parseInt(btn.dataset.i, 10)));
+  });
+}
+
+function paintPlayer(i){
+  const pl = PLAYERS[i];
+  pCard.style.setProperty('--c1', pl.c1);
+  pCard.style.setProperty('--c2', pl.c2);
+  pCardBg.style.setProperty('--c1', pl.c1);
+  pCardBg.style.setProperty('--c2', pl.c2);
+  pKanji.textContent = pl.kanji;
+  pNumBig.textContent = pl.num;
+  pTag.textContent = pl.tag;
+  pName.textContent = pl.name;
+  pJp.textContent = pl.jp;
+  pRole.textContent = pl.role;
+  pQuote.textContent = pl.quote;
+
+  pStats.innerHTML = pl.stats.map(([label, val]) => `
+    <div class="stat">
+      <span class="stat-label">${label}</span>
+      <span class="stat-bar"><i style="--v:${val}%;--c1:${pl.c1};--c2:${pl.c2}"></i></span>
+      <span class="stat-val">${val}</span>
+    </div>
+  `).join('');
+
+  requestAnimationFrame(() => {
+    pStats.querySelectorAll('.stat-bar i').forEach(bar => bar.classList.add('go'));
+  });
+}
+
+function selectPlayer(i){
+  if (i === currentPlayer) return;
+  currentPlayer = (i + PLAYERS.length) % PLAYERS.length;
+  pCard.classList.add('swap');
+  pList.querySelectorAll('.p-item').forEach((b, idx) => b.classList.toggle('active', idx === currentPlayer));
+  setTimeout(() => {
+    paintPlayer(currentPlayer);
+    pCard.classList.remove('swap');
+  }, 240);
+}
+
+document.getElementById('pPrev').addEventListener('click', () => selectPlayer(currentPlayer - 1));
+document.getElementById('pNext').addEventListener('click', () => selectPlayer(currentPlayer + 1));
+
+renderPlayerList();
+paintPlayer(0);
+
+/* ============================================================
+   11. PITCH / FORMATIONS
+   ============================================================ */
+const SQUAD = {
+  gk:  { name: 'Gen Gagamaru', jp: '我牙丸 吟', num: '1',  role: 'Goalkeeper',    c1: '#ffc73d', c2: '#ff7a2f',
+         desc: 'Reflexes born in the mountains. Reads the flight of the ball a fraction earlier than anyone else on the pitch.',
+         stats: [['Reflex', 93], ['Positioning', 88], ['Distribution', 82]] },
+  lb:  { name: 'Hyoma Chigiri', jp: '千切 豹馬', num: '6', role: 'Left Back',      c1: '#ff2e83', c2: '#ff6b3d',
+         desc: 'A sprinter who turns the left flank into a runway. Once he commits, no one catches him.',
+         stats: [['Pace', 99], ['Overlap', 91], ['Crossing', 84]] },
+  cb1: { name: 'Jyubei Aryu', jp: '蟻生 十兵衛', num: '3', role: 'Centre Back',   c1: '#b13dff', c2: '#7c5cff',
+         desc: 'Length, elegance, and an ego that refuses to be beaten in the air. Beauty is his defensive principle.',
+         stats: [['Aerial', 94], ['Tackling', 88], ['Composure', 90]] },
+  cb2: { name: 'Ikki Niko', jp: '二子 一輝', num: '2', role: 'Centre Back',       c1: '#8b5cff', c2: '#3ae0ff',
+         desc: 'Reads the game like a puzzle he has already solved. Slight frame, enormous anticipation.',
+         stats: [['Interception', 92], ['Vision', 90], ['Duels', 78]] },
+  rb:  { name: 'Reo Mikage', jp: '御影 玲王', num: '4', role: 'Right Back',        c1: '#7c5cff', c2: '#3ae0ff',
+         desc: 'An all-rounder who can copy any weapon he sees and deploy it within seconds.',
+         stats: [['Versatility', 95], ['Copying', 92], ['Stamina', 89]] },
+  cm1: { name: 'Rin Itoshi', jp: '糸師 凛', num: '10', role: 'Central Midfield',  c1: '#00d8ff', c2: '#1150ff',
+         desc: 'The perfect sensor. He destroys a defence by understanding it completely before he touches the ball.',
+         stats: [['Technique', 99], ['Tactics', 95], ['Shooting', 97]] },
+  cm2: { name: 'Yoichi Isagi', jp: '潔 世一', num: '11', role: 'Central Midfield', c1: '#1b4dff', c2: '#3ae0ff',
+         desc: 'Metavision. He sees the field as a grid of possibilities and moves to occupy the only one that matters.',
+         stats: [['Vision', 96], ['Link-up', 88], ['Direct Shot', 90]] },
+  cm3: { name: 'Meguru Bachira', jp: '蜂楽 廻', num: '8', role: 'Central Midfield', c1: '#ffd23d', c2: '#ff7a2f',
+         desc: 'The monster plays through him. Chaos on the ball, and chaos is a weapon.',
+         stats: [['Dribbling', 98], ['Improvisation', 95], ['Flair', 94]] },
+  lw:  { name: 'Rensuke Kunigami', jp: '國神 錬介', num: '9', role: 'Left Wing',  c1: '#ff7a2f', c2: '#ffc73d',
+         desc: 'A left foot that ends arguments. Powerful, direct, and completely unbothered by contact.',
+         stats: [['Power', 95], ['Left Shot', 96], ['Aerial', 93]] },
+  st:  { name: 'Shouei Barou', jp: '馬狼 照英', num: '5', role: 'Striker',          c1: '#b13dff', c2: '#5a1bff',
+         desc: 'The King. He does not ask for the ball — he takes the entire field and dares anyone to object.',
+         stats: [['Physical', 97], ['Ego', 99], ['Shooting', 94]] },
+  rw:  { name: 'Seishiro Nagi', jp: '凪 誠士郎', num: '7', role: 'Right Wing',     c1: '#dfe7ff', c2: '#7f9cff',
+         desc: 'Genius touch with zero interest in effort. When he awakens, the trap becomes a weapon.',
+         stats: [['Ball Control', 99], ['Volley', 94], ['Awakening', 76]] }
+};
+
+const FORMATIONS = {
+  '433': {
+    gk:  [150, 368],
+    lb:  [54, 296], cb1: [114, 322], cb2: [186, 322], rb: [246, 296],
+    cm1: [150, 240], cm2: [88, 224], cm3: [212, 224],
+    lw:  [58, 118], st: [150, 92], rw: [242, 118]
+  },
+  '4231': {
+    gk:  [150, 368],
+    lb:  [54, 298], cb1: [114, 322], cb2: [186, 322], rb: [246, 298],
+    cm1: [112, 250], cm2: [188, 250],
+    cm3: [150, 182],
+    lw:  [58, 172], rw: [242, 172],
+    st:  [150, 92]
+  },
+  '352': {
+    gk:  [150, 368],
+    cb1: [92, 322], cb2: [150, 338], cb3: [208, 322],
+    lb:  [44, 238], rb: [256, 238],
+    cm1: [110, 246], cm2: [190, 246], cm3: [150, 210],
+    lw:  [112, 108], rw: [188, 108],
+    st:  [150, 82]
+  }
+};
+
+/* Map formation keys -> slot ids (since formations use different slots) */
+const FORMATION_MAP = {
+  '433':  ['gk','lb','cb1','cb2','rb','cm1','cm2','cm3','lw','st','rw'],
+  '4231': ['gk','lb','cb1','cb2','rb','cm1','cm2','cm3','lw','rw','st'],
+  '352':  ['gk','cb1','cb2','cb3','lb','rb','cm1','cm2','cm3','lw','rw']
+};
+/* For 3-5-2 we reuse players for cb3 & cm3 with fallback definitions */
+const EXTRA = {
+  cb3: { name: 'Rensuke Kunigami', jp: '國神 錬介', num: '9', role: 'Centre Back',
+         c1: '#ff7a2f', c2: '#ffc73d',
+         desc: 'Redeployed as a physical anchor. Wins everything in the air and starts counters with one touch.',
+         stats: [['Aerial', 93], ['Power', 95], ['Recovery', 86]] }
+};
+
+const pitch = document.getElementById('pitch');
+const formationTabs = document.getElementById('formationTabs');
+const fiNum = document.getElementById('fiNum');
+const fiName = document.getElementById('fiName');
+const fiJp = document.getElementById('fiJp');
+const fiRole = document.getElementById('fiRole');
+const fiDesc = document.getElementById('fiDesc');
+const fiBars = document.getElementById('fiBars');
+const finfo = document.getElementById('finfo');
+
+let markers = {};
+let currentFormation = '433';
+let currentSlot = 'cm2';
+
+function buildPitchMarkers(){
+  // remove old
+  Object.values(markers).forEach(m => m.remove());
+  markers = {};
+
+  const allSlots = new Set();
+  Object.values(FORMATION_MAP).forEach(list => list.forEach(s => allSlots.add(s)));
+
+  allSlots.forEach(slot => {
+    const data = SQUAD[slot] || EXTRA[slot];
+    if (!data) return;
+    const el = document.createElement('button');
+    el.className = 'marker';
+    el.type = 'button';
+    el.dataset.slot = slot;
+    el.style.setProperty('--c1', data.c1);
+    el.style.setProperty('--c2', data.c2);
+    el.innerHTML = `${data.num}<span class="mk-name">${data.name.split(' ').slice(-1)[0]}</span>`;
+    el.setAttribute('aria-label', `${data.name}, ${data.role}`);
+    el.addEventListener('click', () => selectSlot(slot));
+    el.addEventListener('mouseenter', () => selectSlot(slot, true));
+    pitch.appendChild(el);
+    markers[slot] = el;
+  });
+}
+
+function applyFormation(name){
+  currentFormation = name;
+  const coords = FORMATIONS[name];
+  const activeSlots = FORMATION_MAP[name];
+
+  Object.entries(markers).forEach(([slot, el]) => {
+    const isActive = activeSlots.includes(slot);
+    const pos = coords[slot];
+    if (isActive && pos){
+      el.style.display = 'grid';
+      el.style.left = (pos[0] / 300 * 100) + '%';
+      el.style.top = (pos[1] / 400 * 100) + '%';
+    } else {
+      el.style.display = 'none';
+    }
+  });
+}
+
+function paintFieldInfo(slot){
+  const data = SQUAD[slot] || EXTRA[slot];
+  if (!data) return;
+  finfo.style.setProperty('--c1', data.c1);
+  finfo.style.setProperty('--c2', data.c2);
+  fiNum.textContent = data.num;
+  fiNum.style.setProperty('--c1', data.c1);
+  fiNum.style.setProperty('--c2', data.c2);
+  fiName.textContent = data.name;
+  fiJp.textContent = data.jp;
+  fiRole.textContent = data.role;
+  fiDesc.textContent = data.desc;
+  fiBars.innerHTML = data.stats.map(([l, v]) => `
+    <div class="stat">
+      <span class="stat-label">${l}</span>
+      <span class="stat-bar"><i style="--v:${v}%;--c1:${data.c1};--c2:${data.c2}"></i></span>
+      <span class="stat-val">${v}</span>
+    </div>
+  `).join('');
+  requestAnimationFrame(() => {
+    fiBars.querySelectorAll('.stat-bar i').forEach(b => b.classList.add('go'));
+  });
+}
+
+function selectSlot(slot, silent){
+  const data = SQUAD[slot] || EXTRA[slot];
+  if (!data) return;
+  if (!silent){
+    if (markers[slot]) {
+      Object.values(markers).forEach(m => m.classList.remove('active'));
+      markers[slot].classList.add('active');
+    }
+    currentSlot = slot;
+  }
+  paintFieldInfo(slot);
+}
+
+formationTabs.addEventListener('click', e => {
+  const btn = e.target.closest('button[data-f]');
+  if (!btn) return;
+  formationTabs.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+  applyFormation(btn.dataset.f);
+
+  // make sure current slot still exists in this formation
+  const list = FORMATION_MAP[btn.dataset.f];
+  if (!list.includes(currentSlot)) currentSlot = 'cm2';
+  selectSlot(currentSlot);
+});
+
+buildPitchMarkers();
+applyFormation('433');
+selectSlot('cm2');
+
+/* ============================================================
+   12. QUIZ
+   ============================================================ */
+const QUIZ = [
+  {
+    q: 'The ball drops in the box with three defenders around you.',
+    opts: [
+      { t: 'Shoot anyway. The goal belongs to me.', s: 'striker' },
+      { t: 'Hold, scan the field, find the killer pass.', s: 'architect' },
+      { t: 'Dribble straight through all three of them.', s: 'monster' }
+    ]
+  },
+  {
+    q: 'Ten minutes left. You are losing 1–0.',
+    opts: [
+      { t: 'Demand the ball. I decide how this ends.', s: 'striker' },
+      { t: 'Rebuild the entire shape and suffocate them.', s: 'architect' },
+      { t: 'Break their rhythm with pure chaos.', s: 'monster' }
+    ]
+  },
+  {
+    q: 'What is a rival to you?',
+    opts: [
+      { t: 'A stepping stone on the way to my goal.', s: 'striker' },
+      { t: 'A piece I can move on the board.', s: 'architect' },
+      { t: 'Fuel. I devour them and grow.', s: 'monster' }
+    ]
+  },
+  {
+    q: 'Choose your weapon.',
+    opts: [
+      { t: 'A direct shot that ignores physics.', s: 'striker' },
+      { t: 'Total field vision — the whole grid at once.', s: 'architect' },
+      { t: "Instinct that can't be taught or copied.", s: 'monster' }
+    ]
+  }
+];
+
+const RESULTS = {
+  striker: {
+    type: 'TYPE 01 — EGOIST',
+    name: 'The Striker',
+    kanji: '潔',
+    c1: '#3ae0ff', c2: '#1150ff',
+    desc: 'You do not wait for the game to come to you. You take the final touch, the final second, the final word. In a field of three hundred, you are the one who pulls the trigger.',
+    stats: [['Finishing', 96], ['Decisiveness', 94], ['Hunger', 99]]
+  },
+  architect: {
+    type: 'TYPE 02 — EGOIST',
+    name: 'The Architect',
+    kanji: '凛',
+    c1: '#8b5cff', c2: '#00d8ff',
+    desc: 'You see the field before it happens. Every run, every gap, every hesitation — a grid you already solved. Control is not a tactic for you. It is an instinct.',
+    stats: [['Vision', 98], ['Tactics', 96], ['Composure', 93]]
+  },
+  monster: {
+    type: 'TYPE 03 — EGOIST',
+    name: 'The Monster',
+    kanji: '蜂',
+    c1: '#ffd23d', c2: '#ff2e83',
+    desc: 'You play on feeling. The unpredictable touch, the impossible angle, the moment nobody else sees. You do not fit into a system — the system bends around you.',
+    stats: [['Instinct', 99], ['Improvisation', 97], ['Flair', 95]]
+  }
+};
+
+const quizStage = document.getElementById('quizStage');
+const quizQ = document.getElementById('quizQ');
+const quizOptions = document.getElementById('quizOptions');
+const quizDots = document.getElementById('quizDots');
+const qNow = document.getElementById('qNow');
+const qTotal = document.getElementById('qTotal');
+const quizResult = document.getElementById('quizResult');
+
+let qIndex = 0;
+let scores = { striker: 0, architect: 0, monster: 0 };
+
+function initQuiz(){
+  qIndex = 0;
+  scores = { striker: 0, architect: 0, monster: 0 };
+  quizResult.classList.remove('on');
+  quizStage.style.display = '';
+  qTotal.textContent = QUIZ.length;
+  quizDots.innerHTML = QUIZ.map(() => '<i></i>').join('');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const item = QUIZ[qIndex];
+  qNow.textContent = qIndex + 1;
+  quizDots.querySelectorAll('i').forEach((d, i) => d.classList.toggle('on', i <= qIndex));
+  quizQ.textContent = item.q;
+
+  const keys = ['A', 'B', 'C'];
+  quizOptions.innerHTML = item.opts.map((o, i) => `
+    <button class="opt" data-s="${o.s}">
+      <span class="opt-key">${keys[i]}</span>
+      <span class="opt-text">${o.t}</span>
+    </button>
+  `).join('');
+
+  quizOptions.querySelectorAll('.opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      scores[btn.dataset.s]++;
+      qIndex++;
+      if (qIndex >= QUIZ.length) showResult();
+      else renderQuestion();
     });
+  });
+}
 
-    /* Newsletter */
-    document.getElementById('nlbtn').addEventListener('click', ()=>{ const v=document.getElementById('nlemail').value; alert('Thanks — subscribed: ' + v); document.getElementById('nlemail').value=''; });
+function showResult(){
+  let best = 'striker', bestVal = -1;
+  ['striker', 'architect', 'monster'].forEach(k => {
+    if (scores[k] > bestVal){ bestVal = scores[k]; best = k; }
+  });
+  const r = RESULTS[best];
 
-    /* Footer year */
-    document.getElementById('year').textContent = new Date().getFullYear();
+  const badge = document.getElementById('resBadge');
+  badge.textContent = r.kanji;
+  badge.style.background = `linear-gradient(140deg, ${r.c1}, ${r.c2})`;
 
-    /* Parallax simple effect for hero image */
-    window.addEventListener('scroll', ()=>{
-      const h = document.querySelector('.hero');
-      const st = window.scrollY; h.style.backgroundPosition = `center ${st * 0.05}px`;
-      // header shrink
-      const header = document.getElementById('siteHeader');
-      if(window.scrollY > 80) header.classList.add('shrink'); else header.classList.remove('shrink');
-    });
+  document.getElementById('resType').textContent = r.type;
+  document.getElementById('resName').textContent = r.name;
+  document.getElementById('resDesc').textContent = r.desc;
 
-    /* Initial render */
-    renderProducts(); updateCartUI();
+  const bars = document.getElementById('resBars');
+  bars.innerHTML = r.stats.map(([l, v]) => `
+    <div class="stat">
+      <span class="stat-label">${l}</span>
+      <span class="stat-bar"><i style="--v:${v}%;--c1:${r.c1};--c2:${r.c2}"></i></span>
+      <span class="stat-val">${v}</span>
+    </div>
+  `).join('');
 
-    /* Accessibility: smooth scroll for anchor links */
-    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click', (e)=>{ e.preventDefault(); const id=a.getAttribute('href').slice(1); const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }));
+  quizStage.style.display = 'none';
+  quizResult.classList.add('on');
 
-    /* Light-weight image lightbox for gallery */
-    document.querySelectorAll('.masonry img').forEach(img=>{
-      img.style.cursor='pointer'; img.addEventListener('click', ()=>{
-        const overlay = document.createElement('div'); overlay.style.position='fixed'; overlay.style.inset=0; overlay.style.background='rgba(0,0,0,0.8)'; overlay.style.display='flex'; overlay.style.alignItems='center'; overlay.style.justifyContent='center'; overlay.style.zIndex=2000; overlay.addEventListener('click', ()=>document.body.removeChild(overlay));
-        const large = document.createElement('img'); large.src = img.src; large.style.maxWidth='92%'; large.style.maxHeight='92%'; large.style.borderRadius='8px'; overlay.appendChild(large); document.body.appendChild(overlay);
-      });
-    });
+  requestAnimationFrame(() => {
+    setTimeout(() => bars.querySelectorAll('.stat-bar i').forEach(b => b.classList.add('go')), 120);
+  });
+}
 
-    /* Small UX: close cart panel on outside click */
-    document.addEventListener('click', (e)=>{
-      if(!cartPanel.classList.contains('open')) return;
-      if(!cartPanel.contains(e.target) && !cartToggle.contains(e.target)) cartPanel.classList.remove('open');
-    });
+document.getElementById('resRestart').addEventListener('click', initQuiz);
+initQuiz();
 
-    /* make icon-cards animate in sequence */
-    const iconCards = document.querySelectorAll('.icon-card');
-    iconCards.forEach((c,i)=>{ setTimeout(()=>c.style.transition='all .45s cubic-bezier(.2,.9,.3,1)', 100*i); });
+/* ============================================================
+   13. CURSOR GLOW (desktop only)
+   ============================================================ */
+const cursorGlow = document.getElementById('cursorGlow');
+let mouseX = state.vw / 2, mouseY = state.vh / 2;
+let glowX = mouseX, glowY = mouseY;
+let hasPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-    /* Expose some debug console helpers */
-    window.PRODUCTS = PRODUCTS; window.cart = cart;
+if (hasPointer){
+  window.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursorGlow.style.opacity = '1';
+  }, { passive: true });
+  window.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; });
 
-  </script>
+  (function glowLoop(){
+    glowX = lerp(glowX, mouseX, 0.09);
+    glowY = lerp(glowY, mouseY, 0.09);
+    cursorGlow.style.transform = `translate3d(${glowX.toFixed(1)}px,${glowY.toFixed(1)}px,0)`;
+    requestAnimationFrame(glowLoop);
+  })();
+} else {
+  cursorGlow.style.display = 'none';
+}
 
+/* ============================================================
+   14. RESIZE
+   ============================================================ */
+let resizeTimer = null;
+let lastW = window.innerWidth;
+
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const newW = window.innerWidth;
+    layout();
+    initDust();
+    if (Math.abs(newW - lastW) > 40) {
+      // grid may have changed -> rebuild handled inside layout()
+    }
+    lastW = newW;
+  }, 220);
+}, { passive: true });
+
+window.addEventListener('orientationchange', () => {
+  setTimeout(() => { layout(); initDust(); }, 320);
+});
+
+/* ============================================================
+   15. IMAGE LOADING + BOOT
+   ============================================================ */
+function boot(){
+  dustSprite = makeSprite();
+  initDust();
+  layout();
+  requestAnimationFrame(tick);
+
+  // verify the remote image, fall back to generated stadium art
+  const probe = new Image();
+  probe.onload = () => { /* remote image is fine */ };
+  probe.onerror = () => {
+    const fb = makeFallbackImage();
+    if (fb){
+      imgSrc = fb;
+      layout();
+    }
+  };
+  probe.src = IMG_URL;
+}
+
+if (document.readyState === 'complete' || document.readyState === 'interactive'){
+  boot();
+} else {
+  document.addEventListener('DOMContentLoaded', boot);
+}
+
+/* soft reload safeguard: reset scroll position */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+</script>
 </body>
 </html>
